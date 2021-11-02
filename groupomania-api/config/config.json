@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "Fabsolo",
+    "password": "KatAmbre0207",
+    "database": "dev_grouposocial_DB",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "Fabsolo",
+    "password": "KatAmbre0207",
+    "database": "test_grouposocial_DB",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "Fabsolo",
+    "password": "KatAmbre0207",
+    "database": "prod_grouposocial_DB",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
