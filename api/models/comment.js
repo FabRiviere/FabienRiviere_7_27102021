@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Relation 1 à plusieurs (de model A à model B) clé étrangère définie à A
       models.Comment.belongsTo(models.User, 
         { foreignKey: {
           allowNull: false

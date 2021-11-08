@@ -228,7 +228,7 @@ exports.getAllPosts = async (req, res) => {
           { where: { UserId: userId, PostId: postId } },
           { truncate: true, restartIdentity: true }
         );
-        res.status(200).send({ messageRetour: "vou n'aimez plus ce post" });
+        res.status(200).send({ messageRetour: "vous n'aimez plus ce post" });
       } else {
         await db.Like.create({
           UserId: userId,
