@@ -4,6 +4,8 @@ const token = require("../middleware/token"); // module qui génère le token
 const fs = require("fs");
 const { Op } = require("sequelize");
 
+
+
 exports.signup = async (req, res) => {
   try {
     const user = await db.User.findOne({
@@ -70,10 +72,13 @@ exports.getAccount = async (req, res) => {
       where: { id: req.params.id },
     });
     res.status(200).send(user);
+    
   } catch (error) {
     return res.status(500).send({ error: "Erreur serveur" });
   }
 };
+
+
 exports.getAllUsers = async (req, res) => {
   // on envoie tous les users sauf admin
   try {
@@ -100,24 +105,26 @@ exports.updateAccount = async (req, res) => {
     let user = await db.User.findOne({ where: { id: id } });
     if (userId === user.id) {
       if (req.file && user.photo) {
-        newPhoto = `${req.protocol}://${req.get("host")}/api/telechargement/${
+        newPhoto = `${req.protocol}://${req.get("host")}/api/upload/${
           req.file.filename
         }`;
-        const filename = user.photo.split("/telechargement")[1];
-        fs.unlink(`telechargement/${filename}`, (err) => {
+        
+        const filename = user.photo.split("/upload")[1];
+        fs.unlink(`upload/${filename}`, (err) => {
           // s'il y avait déjà une photo on la supprime
           if (err) console.log(err);
           else {
-            console.log(`Deleted file: telechargement/${filename}`);
+            console.log(`Deleted file: upload/${filename}`);
           }
         });
       } else if (req.file) {
-        newPhoto = `${req.protocol}://${req.get("host")}/api/telechargement/${
+        newPhoto = `${req.protocol}://${req.get("host")}/api/upload/${
           req.file.filename
         }`;
       }
       if (newPhoto) {
         user.photo = newPhoto;
+        
       }
       if (req.body.bio) {
         user.bio = req.body.bio;
@@ -145,8 +152,8 @@ exports.deleteAccount = async (req, res) => {
     const id = req.params.id;
     const user = await db.User.findOne({ where: { id: id } });
     if (user.photo !== null) {
-      const filename = user.photo.split("/telechargement")[1];
-      fs.unlink(`telechargement/${filename}`, () => {
+      const filename = user.photo.split("/upload")[1];
+      fs.unlink(`upload/${filename}`, () => {
         // sil' y a une photo on la supprime et on supprime le compte
         db.User.destroy({ where: { id: id } });
         res.status(200).json({ messageRetour: "utilisateur supprimé" });
@@ -159,3 +166,5 @@ exports.deleteAccount = async (req, res) => {
     return res.status(500).send({ error: "Erreur serveur" });
   }
 };
+
+

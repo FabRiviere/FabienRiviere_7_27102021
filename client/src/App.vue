@@ -1,27 +1,29 @@
 <template>
-    <v-app>
-        <app-navigation :user='user'></app-navigation>
+<div id="app">
+<!-- header -->
+    <page-header :user="user"></page-header>
 
-        <v-main>
-            <router-view></router-view>
-        </v-main>
+  <main>
+  <router-view></router-view>
+  </main>
 
-        <app-footer :user='user'></app-footer>
-    </v-app>
+  <!-- Footer -->
+   <page-footer :user="user"></page-footer>
+
+  </div>
 </template>
 
 <script>
-import AppNavigation from '@/components/AppNavigation.vue';
-import AppFooter from '@/components/Footer.vue';
+import PageHeader from "./components/Header.vue";
+import PageFooter from "./components/Footer.vue";
 import '../public/style.css';
-
 export default {
-    name: 'App',
-    components: {
-        AppNavigation,
-        AppFooter
-    },
-    data: () => {
+  name: "app",
+  components: {
+    PageHeader,
+    PageFooter
+  },
+  data: () => {
     return {      
     };
   },
@@ -37,5 +39,20 @@ export default {
 
      }
    }
+  
 };
 </script>
+
+<style>
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;800&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin:0;
+  padding: 0;
+  
+}
+
+
+
+</style>

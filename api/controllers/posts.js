@@ -126,7 +126,7 @@ exports.getAllPosts = async (req, res) => {
       });
       if (user !== null) {
         if (req.file) {
-          imageUrl = `${req.protocol}://${req.get("host")}/api/telechargement/${
+          imageUrl = `${req.protocol}://${req.get("host")}/api/upload/${
             req.file.filename
           }`;
         } else {
@@ -162,8 +162,8 @@ exports.getAllPosts = async (req, res) => {
       const post = await db.Post.findOne({ where: { id: req.params.id } });
       if (userId === post.UserId || checkAdmin.admin === true) {
         if (post.imageUrl) {
-          const filename = post.imageUrl.split("/telechargement")[1];
-          fs.unlink(`telechargement/${filename}`, () => {
+          const filename = post.imageUrl.split("/upload")[1];
+          fs.unlink(`upload/${filename}`, () => {
             db.Post.destroy({ where: { id: post.id } });
             res.status(200).json({ message: "Post supprimé" });
           });
@@ -186,15 +186,15 @@ exports.getAllPosts = async (req, res) => {
       let post = await db.Post.findOne({ where: { id: req.params.id } });
       if (userId === post.UserId) {
         if (req.file) {
-          newImageUrl = `${req.protocol}://${req.get("host")}/api/telechargement/${
+          newImageUrl = `${req.protocol}://${req.get("host")}/api/upload/${
             req.file.filename
           }`;
           if (post.imageUrl) {
-            const filename = post.imageUrl.split("/telechargement")[1];
-            fs.unlink(`telechargement/${filename}`, (err) => {
+            const filename = post.imageUrl.split("/upload")[1];
+            fs.unlink(`upload/${filename}`, (err) => {
               if (err) console.log(err);
               else {
-                console.log(`Deleted file: telechargement/${filename}`);
+                console.log(`Deleted file: upload/${filename}`);
               }
             });
           }

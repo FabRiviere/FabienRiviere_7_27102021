@@ -1,49 +1,58 @@
 <template>
-  <v-container fluid class="signup-container ">
-    <v-layout row class="signup-box">
-      <v-col lg="4" md="5" sm="7">
-        <v-card class="signup-card" elevation="3" xs='6'>
-          <v-card-title class=" flat dense dark">
-            <h1 class="font-weight-regular titre">Connexion</h1>
-          </v-card-title>
-          <v-card-text class="font-weight-light">
-            <v-form v-model="isValid">
-              <v-text-field
-                label="email"
-                v-model="email"
-                type="email"
-                :rules="[(v) => !!v || 'Email is required']"
-                required
-                class="input-group--focused"
-              >
-              </v-text-field>
-              <v-text-field
-                label="mot de passe"
-                v-model="password"
-                type="password"
-                :rules="[(v) => !!v || 'Password is required']"
-                required
-                class="input-group--focused"
-              >
-              </v-text-field>
-            </v-form>
-          </v-card-text>
+    <div class='home-container'>
+    <div class='form-container'>
+      <div class='form-container__title'>Connexion</div>
 
-          <div class="danger-alert message" v-html="errorMessage" />
-          <div class="danger-alert message" v-html="message" />
-          <v-card-actions>
-            <v-btn
-              class="dark signup-card__submit"
-              elevation="2"
-              :disabled="!isValid"
-              v-on:click.prevent="login"
-              >Envoyer
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-layout>
-  </v-container>
+        <form @submit.prevent="handleSubmit">
+            
+            <div class='input-form'>
+                <label class='title' for='email'>
+              <input id='email'
+              v-model="email"
+              name="email"
+              type="email"
+              v-validate="'required|email'"
+              :class="{ 'is-invalid': submitted && errors.has('lastName') }"
+              class="input-form-field form-control"
+              autocomplete="off"
+              placeholder="Adresse mail"/>
+              </label>
+
+              <div v-if="submitted && errors.has('email')" class="invalid-feedback">
+                  {{ errors.first("email") }}
+                </div>
+            </div>
+
+            <div class='input-form'>
+                <label class='title' for='password'>
+                <input id='password'
+                v-model="password"
+                name="password"
+                type="password"
+                v-validate="{ required: true, min: 6 }"
+                :class="{ 'is-invalid': submitted && errors.has('password') }"
+                class="input-form-field form-control"
+                placeholder="Mot de passe" />
+                </label>
+
+                <div v-if="submitted && errors.has('password')" class="invalid-feedback">
+                  {{ errors.first("password") }}
+                </div>
+            </div>
+            
+        </form>
+        <div class='danger-alert message' v-html="errorMessage"></div>
+        <div class='danger-alert message' v-html="message"></div>
+
+        <div class="submit">
+            <button :disabled="submitted"
+            v-on:click.prevent="login" class="button">
+            Me connecter
+            </button>
+        </div>
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -57,9 +66,18 @@ export default {
       errorMessage: null,
       isValid: true,
       message: null,
+      submitted: false,
     };
   },
   methods: {
+    handleSubmit() {
+      this.submitted = true;
+      this.$validator.validate().then(valid => {
+        if (valid) {
+          alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+        }
+      });
+    },
     async login() {
       try {
         const response = await Auth.login({
@@ -81,11 +99,9 @@ export default {
           this.email= "";
         this.password= "";
           this.errorMessage = "";
-        }, 500);
+        }, 5000);
       }
     },
   },
 };
 </script>
-
-<style lang="css"></style>

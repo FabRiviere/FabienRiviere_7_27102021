@@ -1,123 +1,57 @@
 <template>
-  <v-container fluid class="post-box">
-    <v-card class="mx-auto post-card" max-width="600">
-      <v-card-title class="post-title-box">
-        <div class="update-title mx-auto">
-          <h1 class="font-weight-regular titre titre_new">
-            Modifier
-          </h1>
-          <v-btn @click="getBackToFeed" class="mx-2 return-btn" small>
-            Retour
-          </v-btn>
-        </div>
-      </v-card-title>
-      <v-divider></v-divider>
-      <v-card-text>
-        <div v-if="showMessage" class="d-flex justify-space-between">
-          <div class="d-flex flex-column mx-auto">
-            <span>Ton message: </span>
-            <div
-              class="message ml-n4
-                "
-            >
-              <span>{{ post.message }}</span>
-            </div>
+  <div class="post-box">
+      <div class="post-card">
+          <div class="post-title-box">
+              <div class="update-title">
+                  <h1 class="titre_new">Modifier</h1>
+                  <button class="return-btn" @click="getBackToFeed">Retour</button>
+              </div>
           </div>
-        </div>
-
-        <div v-if="withMessage" class="text-box">
-          <v-textarea
-            label="Message"
-            v-model="message"
-            text="text"
-            solo
-            type="text"
-            required
-            name="input-7-4"
-            class="mr-5 ml-3 text-area"
-          ></v-textarea>
-        </div>
-        <div class="d-flex justify-center pt-3">
-          <v-btn @click="toggleMessage" x-small>
-            modifier
-          </v-btn>
-        </div>
-      </v-card-text>
-      <v-form v-model="isValid" enctype="multipart/form-data" class="validate ">
-        <div v-if="withLink" class="link-box pb-5 pt-5">
-          <v-text-field
-            name="input-1-3"
-            filled
-            label="lien du gif"
-            v-model="link"
-            type="text"
-            auto-grow
-            class="mr-5 ml-3"
-          ></v-text-field>
-        </div>
-        <div v-if="showImage">
-          <v-img
-            v-if="post.imageUrl"
-            :src="post.imageUrl"
-            :max-height="250"
-            :max-width="150"
-            class="mx-auto mb-5"
-          ></v-img>
-        </div>
-        <div v-if="showLink">
-          <v-img
-            v-if="post.link"
-            :src="post.link"
-            :max-height="250"
-            :max-width="150"
-            class="mx-auto mb-5"
-          ></v-img>
-        </div>
-        <div v-if="withImage" class="pb-5 pt-5 d-flex justify-center">
-          <label for="image" class="pr-3">Image</label>
-          <input
-            @change="uploadImage"
-            type="file"
-            aria-label="image input"
-            accept="image/png, image/jpeg,image/bmp, image/gif"
-            ref="file"
-            name="image"
-          />
-        </div>
-        <v-divider></v-divider>
-        <v-card-text v-if="options" class="d-flex justify-center my-3">
-          <div class="bloc-option">
-            <v-btn
-              v-if="post.link"
-              @click="toggleLink"
-              class="mx-2 mt-2 "
-              x-small
-              :elevation="2"
-            >
-              Changer le Gif
-            </v-btn>
-            <v-btn
-              v-if="post.imageUrl"
-              @click="toggleImage"
-              class="mx-2 mt-2 "
-              x-small
-              :elevation="2"
-            >
-              Changer l'image
-            </v-btn>
+          <div class="card-text">
+              <div class="cart-text-content" v-if="showMessage">
+                  <div class="message-title">
+                      <span>Ton message: </span>
+                      <div class="message">
+                          <span>{{ post.message }} </span>
+                      </div>
+                  </div>
+              </div>
+              <div class="text-box" v-if="withMessage">
+                  <input type="text" name="input-7-4" id="input-7-4" v-model="message" required class="text-area"/>
+              </div>
+              <div class="toggleMessage">
+                  <button @click="toggleMessage">Modifier</button>
+              </div>
           </div>
-        </v-card-text>
-        <div class=" d-flex justify-center  ">
-          <v-btn @click="onSubmit" :disabled="!isValid" class="mb-3"
-            >Poster</v-btn
-          >
-        </div>
-
-      </v-form>
-      
-    </v-card>
-  </v-container>
+          <form action="" class="validate" enctype="multipart/form-data" method="post">
+              <div class="link-box" v-if="withLink">
+                <input type="text" class="linkGif" v-model="link" placeholder="lien du Gif">
+              </div>
+              <div class="image-box" v-if="showImage">
+                  <img v-if="post.imageUrl" :src="post.imageUrl"/>
+              </div>
+              <div class="showLink" v-if="showLink">
+                  <img v-if="post.link" :src="post.link"/>
+              </div>
+              <div class="withImage" v-if="withImage">
+                  <label for="image">Image</label>
+                  <input @change="uploadImage" type="file" aria-label="image input"
+                    accept="image/png, image/jpeg,image/bmp, image/gif" ref="file" name="image"/>
+              </div>
+              <div class="card-text-options" v-if="options">
+                  <div class="bloc-option">
+                      <button v-if="post.link" @click="toggleLink" class="changeGif-btn">Changer le Gif</button>
+                      <button v-if="post.imageUrl" @click="toggleImage" class="changeImg-btn">Changer l'image'</button>
+                  </div>
+              </div>
+              <div class="post-action">
+                  <button type="submit" @click="onSubmit" :class="{'button--disabled' : !isValid}">Poster</button>
+              </div>
+          </form>
+      </div>
+  </div>
 </template>
+
 <script>
 export default {
   name: "SinglePost",

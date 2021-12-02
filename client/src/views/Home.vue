@@ -1,26 +1,27 @@
 <template>
-<v-container class="home-container">
-    <span>
-        <home-hero></home-hero>
-    </span>
-</v-container>
+  <div class="home-container">
+    <div class="bandeau">
+      <div class="welcome__logo">
+        <img src="../assets/icon.svg" alt="logo Groupomania">
+      </div>
+      <div class="welcome">
+        <h1>GroupoMania Social</h1>
+        <h2>Bienvenue sur votre nouveau reseau social</h2>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HomeHero from '@/components/HomeHero';
+// @ is an alias to /src
+
 
 export default {
-    name: 'home',
-    components: {
-        HomeHero
-    }
-};
-</script>
-
-<style scoped>
-.home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  name: 'Home',
+  methods: {
+    logOut: function() {
+      this.$store.dispatch("logOut");
+    },
+  },
 }
-</style>
+</script>

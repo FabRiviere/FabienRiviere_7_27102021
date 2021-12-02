@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
         const decodedToken = jwt.verify(token, 'secret'); 
         // on récupère l'id du token
         const userId = decodedToken.sub;         
-        if (req.body.userId && req.body.userId !== userId) { 
+        if (req.body.userId && (req.body.userId !== userId)) { 
             // on compare le userid de la requête à celui du token
             throw 'User id non valable !';
         } else {

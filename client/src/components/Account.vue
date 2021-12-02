@@ -1,153 +1,96 @@
 <template>
-  <v-container fluid class="signup-container">
-    <v-layout v-if="$store.state.isLoggedIn" row class="account-box mb-5">
-      <v-col lg="4" md="6" sm="7" class="mx-auto">
-        <v-card class="account-card d-flex flex-column" elevation="4" xs6>
-          <div class="profil-top pb-3 ">
-            <v-btn to="/posts" class="mx-2 return-btn" x-small>
-              Retour
-            </v-btn>
-            <v-card-title flat dense dark class="profil-title mr-3"
-              ><h1 class="titre">Modifier le profil</h1>
-            </v-card-title>
-            <div class="delete-account">
-              <v-tooltip v-if="!$store.state.user.admin === true" bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    @click="deleteAccount(user.id)"
-                    class="mx-2"
-                    fab
-                    x-small
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <v-icon small class=" rounded-circle ">
-                      $vuetify.icons.delete
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>Supprimer le compte</span>
-              </v-tooltip>
-            </div>
-          </div>
-          <v-divider></v-divider>
-          <div class="profil-middle mt-3 ">
-            <v-card-title
-              v-if="showPseudo"
-              dark
-              class=" profil-middle__left d-flex justify-space-between"
-            >
-              <span class="pseudo"> Salut {{ user.pseudo }} ! </span>
-              <v-btn @click="togglePseudo" x-small>
-                Modifier
-              </v-btn>
-            </v-card-title>
-            <v-text-field
-              v-if="updatePseudo"
-              label="Nouveau pseudo"
-              v-model="newPseudo"
-              :rules="pseudoRules"
-              required
-              counter="30"
-              hint="Le pseudo doit avoir 3 caractères min et 30 max"
-              class="input-group--focused  mx-3"
-            ></v-text-field>
+  <div class="home-container">
+      <div class="account-box" v-if="$store.state.isLoggedIn">
+          <div class="account-box-container">
+              <div class="account-card">
+                  <div class="profil-top">
+                      <router-link to="/posts" class="back">
+                      Retour
+                      </router-link>
+                      <div class="card-title">
+                          <h1 class="titre">Modifier votre profil</h1>
+                      </div>
+                      <div class="delete-account">
+                          <Tooltip text="Supprimer votre compte" v-if="!$store.state.user.admin === true">
+                              <button type="button" @click="deleteAccount(user.id)" class="delete-btn">
+                                  <mdicon name="trash-can" class="trash"/>
+                              </button>
+                             
+                          </Tooltip>
+                      </div>
+                  </div>
 
-            <v-divider></v-divider>
-            <v-card-title
-              v-if="showPhoto"
-              class="profil-middle__right d-flex  flex-column"
-            >
-              <v-avatar size="96px" class="mt-2">
-                <img
-                  rounded
-                  v-if="user.photo"
-                  :src="user.photo"
-                  alt="Photo de profil"
-                />
-                <v-icon
-                  :color="isLoggedIn"
-                  size="96px"
-                  aria-label="avatar"
-                  v-else
-                  >$vuetify.icons.account</v-icon
-                >
-              </v-avatar>
-              <v-btn @click="togglePhoto" class="mx-2" x-small>
-                Changer
-              </v-btn>
-            </v-card-title>
+                  <div class="profil-middle">
+                      <div class="profil-middle__left" v-if="showPseudo">
+                        <span class="pseudo">Bonjour {{ user.pseudo }} !</span>
+                        <button class="profil-btn" @click="togglePseudo">Modifier</button>
+                      </div>
 
-            <div v-if="updatePhoto" class="d-flex justify-center">
-              <label for="image" class="mr-3">Photo</label>
-              <input
-                @change="uploadImage"
-                type="file"
-                accept="image/png, image/jpeg,
-                    image/bmp, image/gif, image/jpg"
-                ref="file"
-                name="image"
-                class="input-group--focused"
-              />
-            </div>
-          </div>
-          <v-divider></v-divider>
-          <v-card-text v-if="showBio" class=" bio">
-            <div
-              class="d-flex flex-column justify-space-between"
-              max-width="70%"
-            >
-              <strong>Ta bio: </strong>
-              <div>
-                <span v-if="!user.bio"> Parle nous de toi 😊</span>
-                <span class="bio-field">{{ user.bio }}</span>
+                      <input type="text" name="newPseudo" id="newPseudo" 
+                      v-if="updatePseudo" v-model="newPseudo" :rules="pseudoRules" required placeholder="Nouveau Pseudo"
+                      counter="30" hint="Le pseudo doit avoir entre 3 et 30 caractères" class="input-group-newPseudo">
+
+                      <div class="profil-middle__right">
+                        <div class="avatar__account" v-if="showPhoto">
+                          <img v-if="user.photo" :src="user.photo" alt="Photo de profil" class="avatar__account"/>
+                          <mdicon :color="isLoggedIn" size="96px" aria-label="avatar" v-else class="mdi-account-circle" name="account-circle"/>
+                        </div> 
+                        <button @click="togglePhoto" class="profil-btn">Changer</button>
+                      </div>
+
+                      <div class="updatePhoto" v-if="updatePhoto">
+                        <form method="post" enctype="multipart/form-data">
+                        <label for="image">Photo</label>
+                        <input type="file" @change="uploadImage" accept="image/*" ref="file" name="image"/>
+                        </form>
+
+                      </div>
+                  </div>
+
+                  <div class="bio" v-if="showBio">
+                    <div class="bio-container">
+                      <strong>Ta Bio: </strong>
+                      <div class="bio-text">
+                        <span v-if="!user.bio"> Dis nous en + sur toi </span>
+                        <span v-else>{{ user.bio }} </span>
+                      </div>
+                    </div>
+                    <button @click="toggleBio" class="profil-btn">Modifier</button>
+                  </div>
+
+                  <input type="textarea" class="input-group-bio" v-model="newBio" v-if="updateBio"
+                   aria-label="Bio" :rules="bioRules" placeholder=" nouvelle Bio"/> 
+
+                   <div class="card-text" v-if="options">
+                      <br/>
+                      <div class="danger-alert" v-html="errorMessage"></div>
+                      <div class="danger-alert" v-html="messageRetour"></div>
+                      <div class="submit">
+                        <button type="submit" @click="onSubmit(user.id)" :disabled ='!isValid'>Envoyer</button>
+                      </div>
+                   </div>
               </div>
-            </div>
-            <v-btn @click="toggleBio" class="mx-2 mt-2 mr-n6" x-small>
-              Modifier
-            </v-btn>
-          </v-card-text>
-          <v-textarea
-            v-if="updateBio"
-            label="Bio"
-            v-model="newBio"
-            :rules="bioRules"
-            solo
-            name="input-7-4"
-            class="input-group--focused bio"
-          >
-          </v-textarea>
-          <div>
-            <v-card-text v-if="options" class="font-weight-light">
-              <br />
-              <div class="danger-alert" v-html="errorMessage" />
-              <div class="danger-alert" v-html="messageRetour" />
-
-              <div class="d-flex justify-center">
-                <v-btn @click="onSubmit(user.id)" :disabled="!isValid"
-                  >Envoyer</v-btn
-                >
-              </div>
-            </v-card-text>
           </div>
-        </v-card>
-      </v-col>
-    </v-layout>
-    <v-card v-else>
-      <v-card-title class="post-title-box">
-        <div class=" d-flex flex-column update-title pl-3 pb-5 ">
-          <span class="title font-weight-light post-title pb-5 "
-            >Votre compte a été supprimé</span
-          >
+      </div>
+      <div class="card" v-else>
+        <div class="card-title post-title-box">
+          <div class="update-title">
+            <span class="title">Votre compte a été supprimé</span>
+          </div>
         </div>
-      </v-card-title>
-    </v-card>
-  </v-container>
+      </div>
+  </div>
 </template>
 
 <script>
+import Tooltip from './Tooltip.vue';
+
 export default {
   name: "Account",
+  components: {
+      Tooltip,
+  },
+  
   data() {
     return {
       updateBio: false,
@@ -170,6 +113,7 @@ export default {
       errorMessage: null,
     };
   },
+  
   computed: {
     user() {
       return this.$store.getters.user;
@@ -221,6 +165,7 @@ export default {
       this.$store.dispatch("getUserById", this.user.id);
       this.$store.dispatch("updateAccount", formData);
       this.$store.dispatch("getUserById", this.user.id);
+     
       this.updateBio = false;
       this.updatePhoto = false;
       this.updatePseudo = false;
@@ -236,32 +181,8 @@ export default {
         this.getBackHome();
       }, 2000);
     },
+    
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="css">
-.v-avatar {
-  margin-top: -30px;
-  margin-right: 1em;
-}
-.account-card {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 2em;
-  margin-bottom: 4em;
-}
-.profil-top {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 1em;
-}
-.profil-middle {
-  width: 100%;
-  margin: auto !important;
-}
-.profil-title {
-  padding: 0;
-}
-</style>

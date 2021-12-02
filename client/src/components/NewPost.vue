@@ -1,64 +1,29 @@
 <template>
-  <v-container fluid class="post-box">
-    <v-card class="mx-auto post-card" max-width="600">
-      <v-card-title class="post-title-box">
-        <v-icon
-          aria-label="message"
-          role="img"
-          aria-hidden="true"
-          large
-          color="white"
-          left
-        >
-          {{ mdiMessageSettingsOutline }}
-        </v-icon>
-        <div>
-          <h1 class="font-weight-regular titre titre_new">
-            Que partages-tu aujourd'hui ?
-          </h1>
-        </div>
-      </v-card-title>
-      <v-form
-        v-model="isValid"
-        @submit.prevent="onSubmit"
-        enctype="multipart/form-data"
-        class="validate"
-      >
-        <div class="bloc-statut py-5 px-5 mr-5">
-          <v-textarea
-            name="input-1-3"
-            label="Message"
-            v-model="message"
-            :rules="[rules.required]"
-            auto-grow
-            class="input-group--focused"
-          ></v-textarea>
-        </div>
-        <v-card-text
-          v-if="options"
-          class="d-flex flex-column justify-center my-3"
-        >
-          <div class=" d-flex justify-center">
-            <v-icon large center>
-              {{ mdiHospitalBox }}
-            </v-icon>
-          </div>
-          <div>
-            <div class=" d-flex justify-space-around">
-              <v-btn @click="toggleLink" small>
-                Gif
-              </v-btn>
-
-              <v-btn @click="toggleImage" small>
-                Image
-              </v-btn>
+  <div class="home-container">
+      <img src="../assets/icon.png" alt="logo Groupomania" class="posts-card-img">
+      <div class="post-card">
+        <div class="post-title">
+            <mdicon name="message-settings-outline" role="image" aria-label="message"/>
+            <div>
+                <h1 class="titre-new">Que partages tu aujourd'hui</h1>
             </div>
-          </div>
-        </v-card-text>
-        <div class="d-flex justify-center">
-          <div v-if="withImage" class="pb-5 pt-5 ">
-            <div class="d-flex  justify-center ">
-              <label for="image" class="pr-2">Image</label>
+        </div>
+        <form action="post" class="validate" enctype="multipart/form-data" method="post">
+            <input type="textarea" name="input-1-3" id="input-1-3" placeholder="Message" v-model="message" :rules="[rules.required]"/>
+            <div class="card-text" v-if="options">
+                <div class="hospital-icon">
+                    <mdicon name="hospital-box"/>
+                </div>
+                <div class="post-content">
+                    <button class="gif" @click="toggleLink">Gif</button>
+                    <button class="gif" @click="toggleImage">Image</button>
+                </div>
+            </div>
+
+            <div class="addImage">
+          <div v-if="withImage" class="addImage">
+            <div class="addImage-content ">
+              <label for="image" class="img-label">Image</label>
               <input
                 @change="uploadImage"
                 type="file"
@@ -66,46 +31,51 @@
                 image/bmp, image/gif"
                 ref="file"
                 name=" charger une image"
-                class="input-group--focused"
+                class="addImage-input"
               />
             </div>
           </div>
-          <div v-if="withLink" class="pb-5 pt-5 d-flex  justify-center">
-            <v-text-field
+          <div v-if="withLink" class="addLink">
+            <label for="gif" class="gif-label">Lien du gif</label>
+            <input
               name="input-1-7"
               filled
-              label="lien du gif"
+              placeholder="lien du gif"
               v-model="link"
               auto-grow
-              class="input-group--focused"
-            >
-            </v-text-field>
+              class="addLink-input"
+            />
+            
           </div>
         </div>
-        <div class="pb-5 pt-5 d-flex justify-center">
-          <v-btn @click="onSubmit" :disabled="!isValid">Poster</v-btn>
+        <div class="post">
+          <button @click="onSubmit" :disabled="!isValid" class="post-btn">Poster</button>
         </div>
-      </v-form>
-      <br />
-      <br />
-      <div>
-        <div class="danger-alert" v-html="errorMessage" />
-        <div class="danger-alert" v-html="messageRetour" />
+
+        </form>
+
+        <br />
+        <br />
+        <div>
+          <div class="danger-alert" v-html="errorMessage" />
+          <div class="danger-alert" v-html="messageRetour" />
+        </div>
+
       </div>
-    </v-card>
-  </v-container>
+  </div>
 </template>
+
 <script>
-import { mdiMessageSettingsOutline } from "@mdi/js";
-import { mdiHospitalBox } from "@mdi/js";
+// import { mdiMessageSettingsOutline } from "@mdi/js";
+// import { mdiHospitalBox } from "@mdi/js";
 
 export default {
   name: "NewPost",
 
   data() {
     return {
-      mdiMessageSettingsOutline,
-      mdiHospitalBox,
+    //   mdiMessageSettingsOutline,
+    //   mdiHospitalBox,
       isValid: true,
       options: true,
       showLink: true,

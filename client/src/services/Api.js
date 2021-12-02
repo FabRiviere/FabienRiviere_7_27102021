@@ -3,10 +3,12 @@ import store from "../store/store";
 
 export default () => {
   return axios.create({
-    baseURL: process.env.VUE_APP_API_ENDPOINT,
+    baseURL: process.env.VUE_APP_API_ENDPOINT, 
+    
 
     headers: {
       Authorization: `${store.state.token}`,
-    },
+      
+    }, 
   });
 };

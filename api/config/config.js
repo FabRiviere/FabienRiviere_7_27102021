@@ -1,9 +1,9 @@
 
 require("dotenv").config();
 module.exports = {
-  // authentication: {
-  //   jwtSecret: process.env.JWT_SECRET || 'secret',
-  // },
+  authentication: {
+    jwtSecret: process.env.JWT_SECRET || 'secret',
+  },
   "development": {
     "username": process.env.DB_USER,
     "password": process.env.DB_PASS,

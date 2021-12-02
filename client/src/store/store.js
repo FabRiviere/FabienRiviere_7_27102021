@@ -14,7 +14,6 @@ export default new Vuex.Store({
     user: {},
     isLoggedIn: false,
     isLoading: false,
-
     posts: [],
     users: [],
     post: {},
@@ -46,6 +45,7 @@ export default new Vuex.Store({
     isLogged(state) {
       return state.isLoggedIn;
     },
+    
   },
 
   mutations: {
@@ -91,6 +91,7 @@ export default new Vuex.Store({
       state.message = "";
       state.error = "";
     },
+    
     // end users
 
     // posts
@@ -128,6 +129,7 @@ export default new Vuex.Store({
     COMMENT_POST(state, comment) {
       state.posts = [comment, ...state.posts];
       state.message = "post commenté";
+     
     },
     DELETE_COMMENT(state, id) {
       state.posts = [...state.posts.filter((element) => element.id !== id)];
@@ -155,6 +157,7 @@ export default new Vuex.Store({
     },
     setUser({ commit }, user) {
       commit("SET_USER", user);
+      
     },
     getUsers({ commit }) {
       Auth.getUsers().then((response) => {
@@ -169,12 +172,11 @@ export default new Vuex.Store({
         commit("GET_USER_BY_ID", user);
       });
     },
+    
     deleteAccount({ commit }, id) {
       Auth.deleteAccount(id).then(() => {       
           commit("DELETE_ACCOUNT", id);
-      })
-       
-      
+      })  
     },
     updateAccount({ commit }, data) {
       let id = this.state.user.id;
@@ -200,6 +202,7 @@ export default new Vuex.Store({
     getPosts({ commit }) {
       PostService.getPosts().then((response) => {
         const posts = response.data;
+        // console.log(posts);
         commit("GET_POSTS", posts);
       });
     },
@@ -213,6 +216,7 @@ export default new Vuex.Store({
     getPostById({ commit }, id) {
       PostService.getPostById(id).then((response) => {
         const post = response.data;
+        console.log(post);
         commit("GET_POST_BY_ID", post);
       });
     },
@@ -270,6 +274,7 @@ export default new Vuex.Store({
         .then(() => {
           PostService.getPosts().then((response) => {
             const posts = response.data;
+            
             commit("GET_POSTS", posts);
           });
         });
@@ -279,6 +284,7 @@ export default new Vuex.Store({
 
     // comment
     commentPost({ commit }, payload) {
+      
       axios
         .post(
           `${process.env.VUE_APP_API_ENDPOINT}posts/${payload.id}/comments`,
@@ -287,7 +293,9 @@ export default new Vuex.Store({
         )
         .then((response) => {
           const comment = response.data;
+          console.log(comment);
           commit("COMMENT_POST", comment);
+         
         })
         .then(() => {
           PostService.getPosts().then((response) => {

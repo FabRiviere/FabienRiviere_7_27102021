@@ -19,5 +19,6 @@ export default {
   },
   getUserById(id) {
     return Api().get("users/accounts/" + id);
+   
   },
 };
