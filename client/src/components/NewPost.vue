@@ -1,22 +1,22 @@
 <template>
   <div class="home-container">
-      <img src="../assets/icon.png" alt="logo Groupomania" class="posts-card-img">
-      <div class="post-card">
-        <div class="post-title">
-            <mdicon name="message-settings-outline" role="image" aria-label="message"/>
-            <div>
-                <h1 class="titre-new">Que partages tu aujourd'hui</h1>
-            </div>
-        </div>
+      <div class="welcome__logo">
+        <img src="../assets/icon.svg" alt="logo Groupomania">
+      </div>
+      <div class="welcome">
+        <mdicon name="message-settings-outline" role="image" aria-label="message" size="48px"/>
+        <h1>Que partages tu aujourd'hui</h1>
+      </div>
+      <div class="post-card">        
         <form action="post" class="validate" enctype="multipart/form-data" method="post">
-            <input type="textarea" name="input-1-3" id="input-1-3" placeholder="Message" v-model="message" :rules="[rules.required]"/>
+            <input type="textarea" name="input-1-3" id="input-1-3" class="input-form-field" placeholder="Message" v-model="message" :rules="[rules.required]"/>
             <div class="card-text" v-if="options">
                 <div class="hospital-icon">
-                    <mdicon name="hospital-box"/>
+                    <mdicon name="hospital-box" size="3em" />
                 </div>
                 <div class="post-content">
-                    <button class="gif" @click="toggleLink">Gif</button>
-                    <button class="gif" @click="toggleImage">Image</button>
+                    <button class="button gif" @click="toggleLink">Gif</button>
+                    <button class="button gif" @click="toggleImage">Image</button>
                 </div>
             </div>
 
@@ -31,25 +31,26 @@
                 image/bmp, image/gif"
                 ref="file"
                 name=" charger une image"
-                class="addImage-input"
+                class="input-form-field img-field"
               />
             </div>
           </div>
           <div v-if="withLink" class="addLink">
             <label for="gif" class="gif-label">Lien du gif</label>
-            <input
-              name="input-1-7"
-              filled
-              placeholder="lien du gif"
-              v-model="link"
-              auto-grow
-              class="addLink-input"
-            />
+              <input
+                name="input-1-7"
+                filled
+                placeholder="Lien du gif"
+                v-model="link"
+                auto-grow
+                class="input-form-field"
+              />
+            
             
           </div>
         </div>
         <div class="post">
-          <button @click="onSubmit" :disabled="!isValid" class="post-btn">Poster</button>
+          <button @click="onSubmit" :disabled="!isValid" class="button post-btn">Poster</button>
         </div>
 
         </form>

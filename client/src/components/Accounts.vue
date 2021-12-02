@@ -8,23 +8,23 @@
                             <div class="avatar__accounts">
                                 <img v-if="user.photo" :src="user.photo" alt="Photo de profil">
                                     <mdicon name="account-circle" role="avatar" 
-                                    v-else-if="(user.photo === null) & ($store.state.user.id === user.id)" color="pink" size="42px"/>
-                                    <mdicon name="account-circle" role="avatar" size="72px" v-else />
+                                    v-else-if="(user.photo === null) & ($store.state.user.id === user.id)" color="pink" size="96px"/>
+                                    <mdicon name="account-circle" role="avatar" size="96px" v-else />
                             </div>
                             <div class="avatar-infos">
-                                <div>
-                                    <strong class="pseudo">Pseudo : </strong>
-                                    <span>{{ user.pseudo }} </span>
+                                <div class="pseudo">
+                                    
+                                    <span><strong> {{ user.pseudo }} </strong></span>
                                 </div>
-                                <div>
-                                    <strong>Email : </strong>
-                                    <span>{{ user.email }} </span>
+                                <div class="mail_accounts button">
+                                     
+                                    <span><strong> {{ user.email }} </strong></span>
                                 </div>
                             </div>
                         </div>
 
-                        <Tooltip text="Supprimer votre compte" v-if="($store.state.user.id === user.id) || ($store.state.user.admin === true) ">
-                              <button type="button" @click="deleteAccount(user.id)" class="delete-btn">
+                        <Tooltip class="delete_accounts" text="Supprimer votre compte" v-if="($store.state.user.id === user.id) || ($store.state.user.admin === true) ">
+                              <button type="button" @click="deleteAccount(user.id)" class="delete_comment">
                                   <mdicon name="trash-can" class="trash"/>
                               </button>
                              

@@ -4,45 +4,51 @@
           <div class="account-box-container">
               <div class="account-card">
                   <div class="profil-top">
-                      <router-link to="/posts" class="back">
+                      <router-link to="/posts" class="back button">
+                      <mdicon name="arrow-left-circle"/>
                       Retour
                       </router-link>
-                      <div class="card-title">
-                          <h1 class="titre">Modifier votre profil</h1>
-                      </div>
-                      <div class="delete-account">
-                          <Tooltip text="Supprimer votre compte" v-if="!$store.state.user.admin === true">
-                              <button type="button" @click="deleteAccount(user.id)" class="delete-btn">
-                                  <mdicon name="trash-can" class="trash"/>
-                              </button>
-                             
-                          </Tooltip>
+                        <div class="card-title">
+                            <h1 class="titre">Modifier votre profil</h1>
+                        
+                        <div class="delete_account">
+                            <Tooltip text="Supprimer votre compte" v-if="!$store.state.user.admin === true">
+                                <button type="button" @click="deleteAccount(user.id)" class="delete_comment">
+                                    <mdicon name="trash-can" class="trash"/>
+                                </button>
+                              
+                            </Tooltip>
+                        </div>
                       </div>
                   </div>
 
                   <div class="profil-middle">
                       <div class="profil-middle__left" v-if="showPseudo">
                         <span class="pseudo">Bonjour {{ user.pseudo }} !</span>
-                        <button class="profil-btn" @click="togglePseudo">Modifier</button>
+                        <button class="button" @click="togglePseudo">Modifier le pseudo</button>
                       </div>
 
                       <input type="text" name="newPseudo" id="newPseudo" 
                       v-if="updatePseudo" v-model="newPseudo" :rules="pseudoRules" required placeholder="Nouveau Pseudo"
-                      counter="30" hint="Le pseudo doit avoir entre 3 et 30 caractères" class="input-group-newPseudo">
+                      counter="30" hint="Le pseudo doit avoir entre 3 et 30 caractères" class="input-form-field">
 
                       <div class="profil-middle__right">
                         <div class="avatar__account" v-if="showPhoto">
                           <img v-if="user.photo" :src="user.photo" alt="Photo de profil" class="avatar__account"/>
                           <mdicon :color="isLoggedIn" size="96px" aria-label="avatar" v-else class="mdi-account-circle" name="account-circle"/>
                         </div> 
-                        <button @click="togglePhoto" class="profil-btn">Changer</button>
+
+                        <button @click="togglePhoto" class="button">Changer la photo</button>
                       </div>
 
-                      <div class="updatePhoto" v-if="updatePhoto">
-                        <form method="post" enctype="multipart/form-data">
-                        <label for="image">Photo</label>
-                        <input type="file" @change="uploadImage" accept="image/*" ref="file" name="image"/>
-                        </form>
+                      <div class="account_Photo" v-if="updatePhoto">
+                        
+                        <label for="image" ></label>
+                        
+
+                        <input type="file" @change="uploadImage" accept="image/*" ref="file" name="image" id="image" class="updatePhoto" />
+                        
+                        
 
                       </div>
                   </div>
@@ -55,10 +61,10 @@
                         <span v-else>{{ user.bio }} </span>
                       </div>
                     </div>
-                    <button @click="toggleBio" class="profil-btn">Modifier</button>
+                    <button @click="toggleBio" class="button bio-btn">Modifier</button>
                   </div>
 
-                  <input type="textarea" class="input-group-bio" v-model="newBio" v-if="updateBio"
+                  <input type="textarea" class="input-form-field field-bio" v-model="newBio" v-if="updateBio"
                    aria-label="Bio" :rules="bioRules" placeholder=" nouvelle Bio"/> 
 
                    <div class="card-text" v-if="options">
@@ -66,7 +72,7 @@
                       <div class="danger-alert" v-html="errorMessage"></div>
                       <div class="danger-alert" v-html="messageRetour"></div>
                       <div class="submit">
-                        <button type="submit" @click="onSubmit(user.id)" :disabled ='!isValid'>Envoyer</button>
+                        <button type="submit" @click="onSubmit(user.id)" :disabled ='!isValid' class="button">Envoyer</button>
                       </div>
                    </div>
               </div>

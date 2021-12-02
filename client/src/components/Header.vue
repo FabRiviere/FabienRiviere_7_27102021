@@ -6,29 +6,31 @@
          </router-link>
 
          <div class="btngroup">
-             <router-link to="/posts" class="news" custom v-slot="{ navigate }" id="button" v-if="isLogged === true" aria-label="fil d'actualité">
-               <button @click="navigate" @keypress.enter="navigate" role="link" class="news">
-                 Fil d'actualité</button>  
+             <router-link to="/posts" class="black-btn"  id="button" v-if="isLogged === true" aria-label="fil d'actualité">
+               <!-- custom v-slot="{ navigate }"<button @click="navigate" @keypress.enter="navigate" role="link" class="news"> -->
+                Fil d'actualité <!-- </button>   -->
              </router-link>
 
-             <router-link to="/login" class="connect" custom v-slot="{ navigate }" id="button" v-if="isLogged === false" aria-label="Connexion">
-                <button @click="navigate" @keypress.enter="navigate" role="link" class="connect">Connexion</button>
+             <router-link to="/login" class="black-btn" id="button" v-if="isLogged === false" aria-label="Connexion">
+                <!-- <button @click="navigate" @keypress.enter="navigate" role="link" class="connect">Connexion</button> -->
+             Connexion
              </router-link>
 
-             <router-link to="/signup" class="signup" custom v-slot="{ navigate }" id="button" v-if="isLogged === false" aria-label="Inscription">
-               <button @click="navigate" @keypress.enter="navigate" role="link">S'inscrire</button> 
+             <router-link to="/signup" class="black-btn" id="button" v-if="isLogged === false" aria-label="Inscription">
+               <!-- <button @click="navigate" @keypress.enter="navigate" role="link">S'inscrire</button>  -->
+             S'inscrire
              </router-link>
 
-             <router-link :to="`/account/${user.id}`" v-if="isLogged === true" class="profil" id="button"  aria-label="profil">
+             <router-link :to="`/account/${user.id}`" v-if="isLogged === true" class="black-btn profil" aria-label="profil">
               
                 <img :src="user.photo" alt="Avatar" class="avatar__img" v-if="user.photo"/>
-                <mdicon class="avatar__icon" name="account-circle" v-if="user.photo === null"  size="48px"/>
+                <mdicon class="avatar__icon" name="account-circle" v-if="user.photo === null"  size="52px"/>
              
              </router-link>
 
-             <router-link to="/accounts" class="profil" id="button" v-if="isLogged === true" aria-label="tous les profils">
+             <router-link to="/accounts" class=" black-btn profil" id="button" v-if="isLogged === true" aria-label="tous les profils">
                 <!-- <span @click="navigate" @keypress.enter="navigate" role="link" > -->
-                <mdicon class="mdi-account-circle " name="account-group" size="48px" />
+                <mdicon class="mdi-account-circle " name="account-group" size="52px" />
                  <!-- </span>              -->
              </router-link>
 

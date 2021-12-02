@@ -48,7 +48,7 @@
                   <div class="likes-posts">{{ post.Likes.length }} J'aime</div>
               </div>
               <div class="card-actions">
-                  <div class="card-actions-comments">
+                  <div class="card-actions-comments button">
                     <button @click="show = !show" aria-label="accès commentaires">Commentaires</button>
                     <button type="icon" @click="show = !show" aria-label="accès commentaires">
                       <mdicon name="chevron-up" v-if="show = show"/>
@@ -68,10 +68,10 @@
                           <div class="card-comment-input">
                               <form @submit.prevent="onSubmitComment(post.id)">
                                   <input type="text" name="input-1-4" id="input-1-4" placeholder="ton commentaire"
-                                  v-model="data.commentMessage" class="comment-form-message"/>
+                                  v-model="data.commentMessage" class="input-form-field" required/>
 
                                   <button type="submit" :disabled="!isValid"
-                                  class="comment-form-btn">Poster</button>
+                                  class="button comment-btn">Poster</button>
                               </form>
 
                               <div>
@@ -85,7 +85,7 @@
                                   <div class="comment_photo">
                                       <img v-if="comment.User.photo !== null" :src="comment.User.photo" alt="Photo de profil"/>
                                       <mdicon name="account-circle" v-else-if="comment.User.photo === null && comment.UserId === $store.state.user.id"
-                                      role="avatar"/>
+                                      role="avatar" size="64px" />
                                       <mdicon name="account-circle" role="avatar" v-else />
                                   </div>
                                   <div class="comment_body">
@@ -93,11 +93,13 @@
                                       <span class="comment__message" v-html="comment.message"></span>
                                   </div>
 
-                                  <Tooltip text="Supprimer commentaire" v-if="$store.state.user.id === comment.UserId || $store.state.user.admin === true"
-                                   >
-                                      
-                                    <mdicon name="trash-can" @click="deleteComment(comment.id)" aria-label="supprimer commentaire" class="delete_comment"/>
-                                      
+                                  <Tooltip text="Supprimer commentaire" v-if="$store.state.user.id === comment.UserId 
+                                      || $store.state.user.admin === true" class="delete">
+                                  <div class="delete">
+                                   <button @click="deleteComment(comment.id)" class="delete_comment">
+                                    <mdicon name="trash-can" aria-label="supprimer commentaire" class="trash"/>
+                                   </button>
+                                  </div>
                                   </Tooltip>
                               </div>
                           </div>
@@ -189,7 +191,8 @@ export default {
     },
 
     deleteComment(id) {
-      this.$store.dispatch("deleteComment", id), this.reloadFeed();
+      this.$store.dispatch("deleteComment", id), 
+      this.reloadFeed();
     },
   },
 };

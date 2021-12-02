@@ -3,8 +3,12 @@
       <div class="feed-container-bloc">
           <div>
               <div class="posts-card">
-                  <img src="../assets/icon.png" alt="logo Groupomania" class="posts-card-img">
-                  <h1>Le fil d'actualités</h1>
+                  <div class="welcome__logo">
+                    <img src="../assets/icon.svg" alt="logo Groupomania">
+                  </div>
+                  <div class="welcome">
+                    <h1>Les plus Likés !</h1>
+                  </div>
                   <div class="card-title">
                       <Tooltip text="Les plus récents" v-slot:activator="{ on, attrs }">
                           <button to="/posts" class="recents" v-bind="attrs" v-on="on">Les + récents</button>

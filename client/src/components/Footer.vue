@@ -1,13 +1,16 @@
 <template>
   <footer class="footer">
-      <router-link to="/about" class="about-btn" custom v-slot="{ navigate }" id="button">       
-            <button @click="navigate" @keypress.enter="navigate" role="link">Réglement</button>    
+      <router-link to="/about" class="black-btn"  id="button">       
+            <!--custom v-slot="{ navigate }" <button @click="navigate" @keypress.enter="navigate" role="link"></button>     -->
+      Réglement
       </router-link>
 
-      <button v-if="$store.state.isLoggedIn" @click="logOut" to="/" class="logout-btn">
+      <router-link to="/" class="router-btn">
+        <button v-if="$store.state.isLoggedIn" @click="logOut"  class="black-btn">
+          Déconnexion
+        </button>
+      </router-link>
          
-            Déconnexion
-      </button>
 
   </footer>
 </template>
