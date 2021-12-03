@@ -1,93 +1,92 @@
 <template>
+
     <div class='home-container'>
+       
     <div class='form-container'>
       <div class='form-container__title'>Inscription</div>
-
-        <form @submit.prevent="handleSubmit">
+         
+     
+        <form> 
             <div class='input-form'>
           
-                <label class='title' for='pseudo'>
+          
+                <label class='title' for='pseudo'></label>
                 <input id="pseudo"
                 v-model="pseudo"
                 name="pseudo"
                 type="text"
-                v-validate="'required'"
-                :class="{ 'is-invalid': submitted && errors.has('pseudo') }"
                 class="input-form-field form-control"
-                placeholder="Pseudo"/>
-                </label>
+                placeholder="Pseudo"
+                :rules="[(v) => !!v || 'Pseudo is required']"
+               />
+                
+          
+                <!-- <span v-if="!$v.name.required && $v.name$dirty" class="invalid-feedback">Name is required !</span>
+                 <span v-if="!$v.name.alpha && $v.name$dirty" class="invalid-feedback">Name is required !</span> -->
 
-                <div v-if="submitted && errors.has('firstName')" class="invalid-feedback">
-                  {{ errors.first("pseudo") }}
-                </div>
-
-                             
+                
             </div>
 
             <div class='input-form'>
-              <label class='title' for='email'>
+              <label class='title' for='email'></label>
               <input id='email'
               v-model="email"
               name="email"
               type="email"
-              v-validate="'required|email'"
-              :class="{ 'is-invalid': submitted && errors.has('lastName') }"
               class="input-form-field form-control"
               autocomplete="off"
-              placeholder="Adresse mail"/>
-              </label>
+              placeholder="Adresse mail"
+              :rules="emailRules"/>
+              
 
-              <div v-if="submitted && errors.has('email')" class="invalid-feedback">
-                  {{ errors.first("email") }}
-                </div>
+              <!-- <span v-if="(!$v.email.required || $v.email.email ) && $v.email$dirty" class="invalid-feedback">Valid Email is required !</span> -->
                 
               
             </div>
 
             <div class='input-form'>
-                <label class='title' for='password'>
+                <label class='title' for='password'></label>
                 <input id='password'
                 v-model="password"
                 name="password"
                 type="password"
-                v-validate="{ required: true, min: 6 }"
-                :class="{ 'is-invalid': submitted && errors.has('password') }"
+                :rules="[(v) => !!v || 'Password is required']"
                 class="input-form-field form-control"
                 placeholder="Mot de passe" />
-                </label>
+                
+               <!-- <span v-if="!$v.password.required && $v.password$dirty" class="invalid-feedback">Valid password is required !</span>
+               <span v-if="(!$v.password.minLength || $v.password.maxLength) && $v.password$dirty" class="invalid-feedback">
+                 Password must be between {{ $v.password.$params.minLength.min }} and {{ $v.password.$params.maxLength.max }} characters ! </span> -->
 
-                <div v-if="submitted && errors.has('password')" class="invalid-feedback">
-                  {{ errors.first("password") }}
-                </div>
             </div>
             
         </form>
+      
         <div>
           <div class='danger-alert message' v-html="errorMessage"></div>
           <div class='danger-alert message' v-html="message"></div>
         </div>
         
-            <button  class="button" :disabled="submitted" 
+            <button type="submit"  class="button" :disabled="!isValid"
             v-on:click.prevent="signup">
              Créer mon compte           
             </button>
         
 
     </div>
+   
   </div>
+  
 </template>
 
 <script>
 
 import Auth from "../services/Auth.js";
-
+// import { required, minLength, maxLength, alpha, email } from 'vuelidate/lib/validators';
 
 export default {
   name: "Signup",
-  components: {
     
-  },
-  
   data() {
     return {
       pseudo: "",
@@ -97,33 +96,47 @@ export default {
       message: null,
       isValid: true,
       hasSignedUp: false,
-      submitted: false,
-
-      // emailRules: [
-      //   (v) => !!v || "L'email est obligatoire",
-      //   (v) =>
-      //     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-      //     "L'email doit être valide",
-      // ],
-      // pseudoRules: [
-      //   (v) => v.length <= 30 || "Entre 3 et 30 caractères, sans symboles",
-      // ],
-      // passwordRules: [
-      //   (v) =>
-      //     v.length <= 30 ||
-      //     "Le mot de passe doit être de 8 lettres minimum, majuscules et minuscules, pas de symboles",
-      // ],
+      
+      emailRules: [
+        (v) => !!v || "L'email est obligatoire",
+        (v) =>
+          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+          "L'email doit être valide",
+      ],
+      pseudoRules: [
+        (v) => v.length <= 30 || "Entre 3 et 30 caractères, sans symboles",
+      ],
+      passwordRules: [
+        (v) =>
+          v.length <= 30 ||
+          "Le mot de passe doit être de 8 lettres minimum, majuscules et minuscules, pas de symboles",
+      ],
     };    
   },
+  // validations: {
+  //   pseudo: {
+      
+  //     required,
+  //     alpha
+  //   },
+  //   email: {
+  //     required,
+  //     email
+  //   },
+  //   password: {
+  //     required,
+  //     maxLength: maxLength(12),
+  //     minLength: minLength(6)
+  //   }
+  // },
   methods: {
-    handleSubmit() {
-      this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-          alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
-        }
-      });
-    },
+    // submitForm() {
+    //   this.$v.touch();
+
+    //   if(!this.$v.$invalid) {
+    //     console.log(`Pseudo: ${this.pseudo}, Email: ${this.email}, Password: ${this.password} `)
+    //   }
+    // },
     async signup() {
       try {
         const response = await Auth.signup({

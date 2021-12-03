@@ -1,10 +1,13 @@
 <template>
-  <div class="post-box">
+  <div class="home-container">
       <div class="post-card">
           <div class="post-title-box">
               <div class="update-title">
                   <h1 class="titre_new">Modifier</h1>
-                  <button class="return-btn" @click="getBackToFeed">Retour</button>
+                  <button class="button new_btn" @click="getBackToFeed">
+                    <mdicon name="arrow-left-circle"/>
+                    Retour
+                  </button>
               </div>
           </div>
           <div class="card-text">
@@ -17,15 +20,15 @@
                   </div>
               </div>
               <div class="text-box" v-if="withMessage">
-                  <input type="text" name="input-7-4" id="input-7-4" v-model="message" required class="text-area"/>
+                  <input type="text" name="input-7-4" id="input-7-4" v-model="message" required class="text-area input-form-field"/>
               </div>
               <div class="toggleMessage">
-                  <button @click="toggleMessage">Modifier</button>
+                  <button @click="toggleMessage" class="button">Modifier</button>
               </div>
           </div>
-          <form action="" class="validate" enctype="multipart/form-data" method="post">
+          <form class="validate" enctype="multipart/form-data">
               <div class="link-box" v-if="withLink">
-                <input type="text" class="linkGif" v-model="link" placeholder="lien du Gif">
+                <input type="text" class="linkGif input-form-field" v-model="link" placeholder="lien du Gif" auto-grow filled>
               </div>
               <div class="image-box" v-if="showImage">
                   <img v-if="post.imageUrl" :src="post.imageUrl"/>
@@ -40,12 +43,12 @@
               </div>
               <div class="card-text-options" v-if="options">
                   <div class="bloc-option">
-                      <button v-if="post.link" @click="toggleLink" class="changeGif-btn">Changer le Gif</button>
-                      <button v-if="post.imageUrl" @click="toggleImage" class="changeImg-btn">Changer l'image'</button>
+                      <button v-if="post.link" @click="toggleLink" class="changeGif-btn button">Changer le Gif</button>
+                      <button v-if="post.imageUrl" @click="toggleImage" class="changeImg-btn button">Changer l'image'</button>
                   </div>
               </div>
-              <div class="post-action">
-                  <button type="submit" @click="onSubmit" :class="{'button--disabled' : !isValid}">Poster</button>
+              <div class="modify-post-action">
+                  <button type="submit" @click="onSubmit" :disabled="!isValid" class="button">Poster</button>
               </div>
           </form>
       </div>
@@ -135,16 +138,6 @@ export default {
 };
 </script>
 <style lang="css" scoped>
-
-.return-btn {
-  position: absolute;
-  right: 0;
-  top: 10px;
-}
-.link-box {
-  display: flex;
-  align-content: center;
-}
 .message {
   width: 500px;
   margin: 1.2em !important;

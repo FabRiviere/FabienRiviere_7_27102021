@@ -22,7 +22,7 @@
             <p>
               Vous pouvez publier des messages accompagnés, ou non, au choix d'un gif ou d'une image.
                 <br/><br/>
-                Vous pouvez ajouter une photo de profil et renseigner votre bio pour vous décrire en cliquant votre avatar de compte une fois celui-ci créé.
+                Vous pouvez ajouter une photo de profil et renseigner votre bio pour vous décrire en cliquant sur votre avatar de compte une fois celui-ci créé.
                 <br/><br/>
                 Merci d'être bienveillant et tolérant avec vos collègues.
                 Sachez que votre service RH se réserve le droit de supprimer tous les messages, commentaires ou même

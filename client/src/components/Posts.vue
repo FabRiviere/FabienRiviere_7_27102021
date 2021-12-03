@@ -19,7 +19,7 @@
 
                     <Tooltip text="Modifier le post" v-if="$store.state.user.id == post.User.id" class="updatePost">
                         <button type="button" @click="getOnePost(post.id)" class="updatePost-btn">
-                            <mdicon name="update" class="update"/>
+                            <mdicon name="pencil-circle" class="update" />
                         </button>
                         
                     </Tooltip>

@@ -9,18 +9,25 @@
                   <div class="welcome">
                     <h1>Les plus Likés !</h1>
                   </div>
-                  <div class="card-title">
-                      <Tooltip text="Les plus récents" v-slot:activator="{ on, attrs }">
-                          <button to="/posts" class="recents" v-bind="attrs" v-on="on">Les + récents</button>
+                  <div class="feed-group-btn">
+                      <Tooltip text="Les plus récents">
+                        <router-link to="/posts" class="button recents" custom v-slot="{ navigate }" id="button">
+                          <button @click="navigate" @keypress.enter="navigate" role="link" class="button ">Les + récents</button>
+                        </router-link>
                       </Tooltip>
-                      <Tooltip text="Les plus likés" v-slot:activator="{ on, attrs }">
-                          <button to="/hot" class="hot-posts" v-bind="attrs" v-on="on">Les + likés</button>
-                      </Tooltip>
-                      <Tooltip text="Publier" v-slot:activator="{ on, attrs }">
-                          <button to="/add" class="add-btn" v-bind="attrs" v-on="on">
+                      <Tooltip text="Les plus likés">
+                        <router-link to="/hot" class="button hot-posts" custom v-slot="{ navigate }" id="button">
+                          <button @click="navigate" @keypress.enter="navigate" role="link" class="button hot-posts">Les + likés</button>
+                        </router-link>
+                      </Tooltip>               
+                      <Tooltip text="Publier">
+                        <router-link to="/add" class="button add-btn" custom v-slot="{ navigate }" id="button">
+                          <button @click="navigate" @keypress.enter="navigate" role="link" class="button add-btn">
                           <mdicon name="pencil-outline" aria-label="publier" role="img"/>
                           </button>
+                        </router-link>
                       </Tooltip>
+                        
                   </div>
               </div>
           </div>

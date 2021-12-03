@@ -1,6 +1,9 @@
 
 /* ! HOME PAGE */
-
+/* main {
+  width: 100vw;
+  height: calc(100vh - 189.5px);
+} */
 body {
   margin: 0;
   padding: 0;
@@ -105,7 +108,7 @@ body {
   color: #AE1100;
   text-decoration: none;
   font-weight: bold;
-  text-shadow: .3px .3px .3px #FFF;
+  
 }
 .black-btn:hover {
 transform: scale(1.2);
@@ -200,6 +203,13 @@ label {
 .button:active {
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
+/* .invalid-feedback {
+  width: 100%;
+  height: 2em;
+  color: #AE1100;
+  background-color: aquamarine;
+  font-size: 1em;
+} */
 
 /* ! A regarder */
 /* .button--disabled {
@@ -209,14 +219,15 @@ label {
 .button--disabled:hover {
   cursor:not-allowed;
   background:#cecece;
-}
+}*/
+
 .danger-alert {
   padding: .5em;
   width: 100%;
   height: 1em;
   color: #AE1100;
   font-weight: bold;
-} */
+} 
 
 /* ! posts */
 
@@ -282,11 +293,57 @@ label {
   justify-content: flex-end;
   padding: .5em 1em;
 }
-.updatePost {
- margin: 0 .5em;
+.updatePost-btn {
+  padding: .5em;
+  color: rgb(61, 11, 241);
+  border-radius: 5em;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 1em;
+  font-weight: 600;
+  background-color:#ebecf0;
+  text-shadow: 1px 1px 0 #FFF;
+  box-shadow: -5px -5px 20px #FFF,  5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  margin-right: 1em;
 }
-.deletePost {
- margin: 0 .5em;
+.updatePost-btn span {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.updatePost-btn:hover {
+  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+.updatePost-btn:active {
+  box-shadow: inset 1px 1px 2px #FFF,inset -1px -1px 2px #BABECC;
+}
+.deletePost-btn {
+  padding: .5em;
+  color: rgb(11, 97, 68);
+  border-radius: 5em;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-size: 1em;
+  font-weight: 600;
+  background-color:#ebecf0;
+  text-shadow: 1px 1px 0 #FFF;
+  box-shadow: -5px -5px 20px #FFF,  5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  margin-right: .5em;
+}
+.deletePost-btn span {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.deletePost-btn:hover {
+  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+.deletePost-btn:active {
+  box-shadow: inset 1px 1px 2px #FFF,inset -1px -1px 2px #BABECC;
 }
 .profil-post {
  width: 96px;
@@ -546,7 +603,7 @@ label {
   text-shadow: 1px 1px 0 #FFF;
   box-shadow: -5px -5px 20px #FFF,  5px 5px 20px #BABECC;
   transition: all 0.2s ease-in-out;
-  margin-right: 2em;
+  margin-right: 1em;
 }
 .delete_comment span {
   width: 16px;
@@ -558,6 +615,39 @@ label {
 }
 .delete_comment:active {
   box-shadow: inset 1px 1px 2px #FFF,inset -1px -1px 2px #BABECC;
+}
+
+/* ! POST GETONE MODIFY */
+
+.post-title-box {
+  width: 100%;
+  display: flex;
+}
+.update-title {
+  width: 100%;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: flex-end;
+  font-size: 1em;
+}
+.titre_new {
+  margin-left: 4em;
+}
+.new_btn {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #AE1100;
+  text-decoration: none;
+  padding: 0 1em;
+  
+}
+.modify-post-action {
+  margin: 1em;
+}
+.text-area {
+  padding: .5em 2em;
+  font-size: 1em;
+  color: #045f9c;
 }
 
 /* ! Acccount */
@@ -748,6 +838,7 @@ input#file-upload-button{
   width: 96px;
   height: 96px;
   border-radius: 3em;
+  color: #2196F3;
 }
 .avatar__accounts img {
   width: 96px;
@@ -943,6 +1034,7 @@ input#file-upload-button{
   border-radius: 5em;
   padding: .5em;
   font-size: 1.5em;
+  text-align: center;
   color: #AE1100;
   text-shadow: 1px 1px 1px #FFF;
   margin-right: .5em;
