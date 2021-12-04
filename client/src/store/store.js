@@ -216,7 +216,6 @@ export default new Vuex.Store({
     getPostById({ commit }, id) {
       PostService.getPostById(id).then((response) => {
         const post = response.data;
-        console.log(post);
         commit("GET_POST_BY_ID", post);
       });
     },

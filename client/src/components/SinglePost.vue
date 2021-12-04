@@ -13,7 +13,7 @@
           <div class="card-text">
               <div class="cart-text-content" v-if="showMessage">
                   <div class="message-title">
-                      <span>Ton message: </span>
+                      <span class="mess-title">Ton message :</span>
                       <div class="message">
                           <span>{{ post.message }} </span>
                       </div>
@@ -26,7 +26,7 @@
                   <button @click="toggleMessage" class="button">Modifier</button>
               </div>
           </div>
-          <form class="validate" enctype="multipart/form-data">
+          <div class="validate" enctype="multipart/form-data">
               <div class="link-box" v-if="withLink">
                 <input type="text" class="linkGif input-form-field" v-model="link" placeholder="lien du Gif" auto-grow filled>
               </div>
@@ -50,7 +50,7 @@
               <div class="modify-post-action">
                   <button type="submit" @click="onSubmit" :disabled="!isValid" class="button">Poster</button>
               </div>
-          </form>
+          </div>
       </div>
   </div>
 </template>
@@ -69,7 +69,7 @@ export default {
       showImage: true,
       showMessage: true,
       message: "",
-      link: null,
+      link: "",
       file: "",
      
     };
@@ -114,9 +114,11 @@ export default {
       if (this.link !== null) {
         formData.append("link", this.link);
       }
-      formData.append("image", this.file);
-          this.$store.dispatch("getPosts");
+     
+        formData.append("image", this.file);
+      
       this.$store.dispatch("updatePost", formData);
+      this.$store.dispatch("getPosts");
       this.$store.dispatch("getPostById", id);
       this.showImage = true;
       this.options = false;

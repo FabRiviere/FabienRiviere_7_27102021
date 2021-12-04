@@ -31,11 +31,24 @@ body {
   text-shadow: 1px 1px 1px #FFF;
 }
 .welcome h1 {
+  font-size: 5em;
+  margin: 0;
+  color: #c0c0c0; 
+  font-weight: bold;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  text-shadow: -6px 6px 12px rgba(0,0,0,0.5), 
+               6px -6px 12px rgba(255,255,255,0.8);
+  position: relative;
+}  
+
+.welcome h2 {
   font-size: 3em;
   margin: 0;
-}
-.welcome h2 {
-  font-size: 2em;
+  color: #c0c0c0; 
+  font-weight: bold;
+  text-shadow: -3px 3px 6px rgba(0,0,0,0.5), 
+               3px -3px 6px rgba(255,255,255,0.8);
 }
 .welcome__logo img {
   width: 10em;
@@ -53,6 +66,7 @@ body {
   transition: all 0.2s ease-in-out;
   appearance: none;
   -webkit-appearance: none;
+  margin-bottom: 2em;
 }
 .welcome__logo:hover {
   box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
@@ -158,18 +172,24 @@ transform: scale(1.2);
 .input-form {
   width: 40vw;
   height: 8vh;
+  margin-bottom: 2em;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
-label {
+/* label {
   display: flex;
   justify-content: center;
   margin-bottom: 1.5em;
   width: 100%; 
-}
+  
+} */
 .input-form-field {
-  height: 50%;
+  /* height: 70%;
+  width: 80%; */
+  width: 90%;
   margin: 0.5em 2em 0 0;
   box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
-  width: 80%;
   border: 0;
   outline: 0;
   font-size: 1.2em;
@@ -203,13 +223,14 @@ label {
 .button:active {
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
-/* .invalid-feedback {
+.error {
   width: 100%;
-  height: 2em;
   color: #AE1100;
-  background-color: aquamarine;
-  font-size: 1em;
-} */
+  /* background-color: aquamarine; */
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
 
 /* ! A regarder */
 /* .button--disabled {
@@ -233,6 +254,7 @@ label {
 
 .feed-container {
   padding: 1em;
+
 }
 .feed-container-bloc {
   display: flex;
@@ -257,6 +279,10 @@ label {
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: center;
+}
+.card-text {
+  display: flex;
+  flex-flow: row wrap;
 }
 .posts-card-img {
  height: 5em;
@@ -632,6 +658,28 @@ label {
 }
 .titre_new {
   margin-left: 4em;
+}
+.message-title {
+  margin-top: 2em;
+}
+.mess-title {
+  color:#61677C;
+  font-weight: bold;
+  text-shadow: -5px -5px 20px #FFF,  5px 5px 20px #BABECC;
+  padding: 1em;
+  box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  border: 0;
+  outline: 0;
+  border-radius: 1em ;
+}
+.mess-title:hover {
+  box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+.changeGif-btn {
+  margin-top: 1em;
+}
+.changeImg-btn {
+  margin-top: 1em;
 }
 .new_btn {
   font-size: 1.5em;
