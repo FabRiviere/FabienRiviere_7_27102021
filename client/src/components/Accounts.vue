@@ -1,5 +1,5 @@
 <template>
-  <div>
+  
       <div class="home-container">
           <div class="accounts-box" v-if="$store.state.users">
                 <div class="card-users" v-for="user of users" :key="user.id" :user="user">
@@ -34,7 +34,7 @@
                 </div>
           </div>
       </div>
-  </div>
+  
 </template>
 
 <script>

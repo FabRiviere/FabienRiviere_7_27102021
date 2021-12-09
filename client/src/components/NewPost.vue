@@ -7,10 +7,10 @@
         <mdicon name="message-settings-outline" role="image" aria-label="message" size="48px"/>
         <h1>Que partages tu aujourd'hui</h1>
       </div>
-      <div class="post-card">        
+      <div class="post-card post-card-new">        
         <form action="post" class="validate" enctype="multipart/form-data" method="post">
             <input type="textarea" name="input-1-3" id="input-1-3" class="input-form-field" placeholder="Message" v-model="message" :rules="[rules.required]"/>
-            <div class="card-text" v-if="options">
+            <div class="card-text card-text-new" v-if="options">
                 <div class="hospital-icon">
                     <mdicon name="hospital-box" size="3em" />
                 </div>

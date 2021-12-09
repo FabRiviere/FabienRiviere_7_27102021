@@ -10,53 +10,53 @@
             <div class='input-form'>
           
           
-                <label class='title' for='pseudo'></label>
-                <input id="pseudo"
+                 <ValidationProvider name="pseudo" rules="required|between:3,30" v-slot="v" v-model="isValid"  class="input-form">
+                <input 
                 v-model="pseudo"
                 name="pseudo"
                 type="text"
-                class="input-form-field form-control"
+                class="input-form-field"
                 placeholder="Pseudo"
-                :rules="[(v) => !!v || 'Pseudo is required']"
+                autocomplete="off"
                />
-                
-          
-                <!-- <span v-if="!$v.name.required && $v.name$dirty" class="invalid-feedback">Name is required !</span>
-                 <span v-if="!$v.name.alpha && $v.name$dirty" class="invalid-feedback">Name is required !</span> -->
-
-                
+                <div class="error">{{ v.errors[0] }} </div>
+              </ValidationProvider>
+     
             </div>
 
             <div class='input-form'>
-              <label class='title' for='email'></label>
-              <input id='email'
-              v-model="email"
-              name="email"
-              type="email"
-              class="input-form-field form-control"
-              autocomplete="off"
-              placeholder="Adresse mail"
-              :rules="emailRules"/>
-              
 
-              <!-- <span v-if="(!$v.email.required || $v.email.email ) && $v.email$dirty" class="invalid-feedback">Valid Email is required !</span> -->
+              <ValidationProvider name="email" rules="required|email" v-slot="v" v-model="isValid" class="input-form">
+              
+                <input 
+                  v-model="email"
+                  name="email"
+                  type="email"
+                  class="input-form-field"
+                  
+                  autocomplete="off"
+                  placeholder="Adresse mail"
+                />
+                <div class="error">{{ v.errors[0] }} </div>
+             
+              
+              </ValidationProvider>
                 
               
             </div>
 
             <div class='input-form'>
-                <label class='title' for='password'></label>
-                <input id='password'
+                <ValidationProvider name="password" rules="required" v-slot="v" v-model="isValid" class="input-form">
+                <input 
                 v-model="password"
                 name="password"
                 type="password"
-                :rules="[(v) => !!v || 'Password is required']"
+                autocomplete="off"
                 class="input-form-field form-control"
                 placeholder="Mot de passe" />
                 
-               <!-- <span v-if="!$v.password.required && $v.password$dirty" class="invalid-feedback">Valid password is required !</span>
-               <span v-if="(!$v.password.minLength || $v.password.maxLength) && $v.password$dirty" class="invalid-feedback">
-                 Password must be between {{ $v.password.$params.minLength.min }} and {{ $v.password.$params.maxLength.max }} characters ! </span> -->
+                <div class="error">{{ v.errors[0] }} </div>
+              </ValidationProvider>
 
             </div>
             
@@ -83,6 +83,27 @@
 
 import Auth from "../services/Auth.js";
 // import { required, minLength, maxLength, alpha, email } from 'vuelidate/lib/validators';
+import { extend } from 'vee-validate';
+import { required, email, between  } from 'vee-validate/dist/rules';
+// import { configure } from 'vee-validate';
+
+extend('email', email);
+extend('between', { 
+  ...between,
+  message: "le pseudo doit être composé entre 3 à 30 caractères" } )
+// Override the default message.
+extend('required', {
+  ...required,
+  message: 'Ce champ est obligatoire'
+});
+// configure({
+//   classes: {
+//     valid: 'is-valid',
+//     invalid: 'is-invalid',
+//     dirty: ['is-dirty', 'is-dirty'], // multiple classes per flag!
+//     // ...
+//   }
+// })
 
 export default {
   name: "Signup",
@@ -164,3 +185,4 @@ export default {
     
 };
 </script>
+

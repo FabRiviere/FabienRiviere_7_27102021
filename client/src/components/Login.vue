@@ -4,9 +4,9 @@
       <div class='form-container__title'>Connexion</div>
 
        
-            
+          <form >  
             <div class='input-form'>
-              <ValidationProvider name="email" rules="required|email" v-slot="v">
+              <ValidationProvider name="email" rules="required|email" v-slot="v" v-model="isValid" class="input-form">
                 
                   <input 
                   v-model="email"
@@ -22,7 +22,7 @@
             </div>
 
             <div class='input-form'>
-              <ValidationProvider name="password" rules="required" v-slot="v">
+              <ValidationProvider name="password" rules="required" v-slot="v" v-model="isValid" class="input-form">
 
                 
                 <input 
@@ -30,19 +30,20 @@
                   name="password"
                   type="password"
                   class="input-form-field"
-                  placeholder="Mot de passe" />
+                  placeholder="Mot de passe"
+                   autocomplete="off" />
 
                 <div class="error">{{ v.errors[0] }} </div>
               </ValidationProvider>
 
             </div>
-            
+          </form>  
         
         <div class='danger-alert message' v-html="errorMessage"></div>
         <div class='danger-alert message' v-html="message"></div>
 
         <div class="submit">
-            <button :disabled="submitted"
+            <button :disabled="!isValid"
             v-on:click.prevent="login" class="button">
             Me connecter
             </button>
@@ -76,6 +77,11 @@ export default {
       
     };
   },
+  // computed: {
+  //   isValid() {
+  //     return this.email && this.password;
+  //   }
+  // },
   
   methods: {
     // handleSubmit() {

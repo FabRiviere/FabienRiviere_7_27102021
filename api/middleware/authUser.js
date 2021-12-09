@@ -6,18 +6,17 @@ exports.valid = (req, res, next) => {
   const passwordSchema = new passwordValidator();
   passwordSchema
     .is()
-    .min(8) // Minimum length 8
+    .min(8) // Minimum 8 caractères
     .is()
-    .max(20) // Maximum length 20
+    .max(20) // Maximum 20 caractères
     .has()
-    .uppercase() // Must have uppercase letters
+    .uppercase() // Doit contenir une majuscule minimum
     .has()
-    .lowercase() // Must have lowercase letters
+    .lowercase() // Doit contenir une minuscule minimum
     .has()
     .not()
-    .symbols(); // Has no symbols
-  //.has().not().spaces()
-  // Should not have spaces is a wrong rule to apply
+    .symbols(); // Pas de symboles
+  
 
   if (
     !emailValidator.validate(req.body.email) ||
@@ -25,7 +24,7 @@ exports.valid = (req, res, next) => {
   ) {
     return res.status(400).send({
       error:
-        "Merci de vérifier votre adresse mail, et votre mot de passe (doit contenir au minum 8 lettres avec des minuscules et majuscules)  ",
+        "Merci de vérifier votre email, et votre mot de passe (composé de 8 caractères minimum avec des minuscules et majuscules)  ",
     });
   } else if (
     emailValidator.validate(req.body.email) ||
@@ -43,7 +42,7 @@ exports.checkPseudo = (req, res, next) => {
   } else {
     return res.status(400).send({
       error:
-        "Votre pseudo doit être de 3 caractères minimum et 30 maximum, sont acceptées les lettres, chiffres et underscore (_)  ",
+        "Le pseudo doit être de 3 caractères minimum et 30 maximum.Il accepte les lettres, chiffres et underscore (_)  ",
     });
   }
 };

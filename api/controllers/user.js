@@ -1,10 +1,8 @@
 const bcrypt = require("bcrypt"); // chiffrement du password
-const db = require("../models"); // mdèles de la bdd
+const db = require("../models"); // modèles de la bdd MySQL
 const token = require("../middleware/token"); // module qui génère le token
 const fs = require("fs");
 const { Op } = require("sequelize");
-
-
 
 exports.signup = async (req, res) => {
   try {
@@ -13,7 +11,7 @@ exports.signup = async (req, res) => {
     });
     if (user !== null) {
       if (user.pseudo === req.body.pseudo) {
-        return res.status(400).json({ error: "ce pseudo est déjà utilisé" });
+        return res.status(400).json({ error: "ce pseudo est déjà utilisé par un collègue" });
       }
     } else {
       const hash = await bcrypt.hash(req.body.password, 10);
@@ -29,11 +27,11 @@ exports.signup = async (req, res) => {
         user: newUser,
         token: tokenObject.token,
         expires: tokenObject.expiresIn,
-        message: `Votre compte est maintenant actif ${newUser.pseudo} !`,
+        message: `Votre compte est maintenant activé et en ligne ${newUser.pseudo} !`,
       });
     }
   } catch (error) {
-    return res.status(400).send({ error: "email déjà utilisé" });
+    return res.status(400).send({ error: "cet email est déjà utilisé par un collègue" });
   }
 };
 
@@ -41,11 +39,11 @@ exports.login = async (req, res) => {
   try {
     const user = await db.User.findOne({
       where: { email: req.body.email },
-    }); // on vérifie que l'adresse mail figure bien dan la bdd
+    }); // on vérifie que l'adresse mail figure bien dans la base de données
     if (user === null) {
-      return res.status(403).send({ error: "Connexion échouée" });
+      return res.status(403).send({ error: "La Connexion a échouée" });
     } else {
-        // on compare les mots de passes
+        // on demande à bcrypt de comparer les mots de passes
       const hash = await bcrypt.compare(req.body.password, user.password);
       if (!hash) {
         return res.status(401).send({ error: "Mot de passe incorrect !" });
@@ -57,12 +55,12 @@ exports.login = async (req, res) => {
           token: tokenObject.token,
           sub: tokenObject.sub,
           expires: tokenObject.expiresIn,
-          message: "Bonjour " + user.pseudo + " !",
+          message: "Bonjour et bienvenue " + user.pseudo + " !",
         });
       }
     }
   } catch (error) {
-    return res.status(500).send({ error: "Erreur serveur" });
+    return res.status(500).send({ error: "Erreur du serveur" });
   }
 };
 exports.getAccount = async (req, res) => {
@@ -74,16 +72,16 @@ exports.getAccount = async (req, res) => {
     res.status(200).send(user);
     
   } catch (error) {
-    return res.status(500).send({ error: "Erreur serveur" });
+    return res.status(500).send({ error: "Erreur du serveur" });
   }
 };
 
 
 exports.getAllUsers = async (req, res) => {
-  // on envoie tous les users sauf admin
+  // on renvoie tous les users sauf admin (qui a l'id: 1)
   try {
     const users = await db.User.findAll({
-      attributes: ["pseudo", "id", "photo", "bio", "email"],
+      attributes: ["pseudo", "email", "id", "photo", "bio"],
       where: {
         id: {
           [Op.ne]: 1,
@@ -92,7 +90,7 @@ exports.getAllUsers = async (req, res) => {
     });
     res.status(200).send(users);
   } catch (error) {
-    return res.status(500).send({ error: "Erreur serveur" });
+    return res.status(500).send({ error: "Erreur du serveur" });
   }
 };
 exports.updateAccount = async (req, res) => {
@@ -111,7 +109,7 @@ exports.updateAccount = async (req, res) => {
         
         const filename = user.photo.split("/upload")[1];
         fs.unlink(`upload/${filename}`, (err) => {
-          // s'il y avait déjà une photo on la supprime
+          // s'il y avait déjà une photo de postée on la supprime
           if (err) console.log(err);
           else {
             console.log(`Deleted file: upload/${filename}`);
@@ -123,8 +121,7 @@ exports.updateAccount = async (req, res) => {
         }`;
       }
       if (newPhoto) {
-        user.photo = newPhoto;
-        
+        user.photo = newPhoto;       
       }
       if (req.body.bio) {
         user.bio = req.body.bio;
@@ -141,10 +138,10 @@ exports.updateAccount = async (req, res) => {
     } else {
       res
         .status(400)
-        .json({ messageRetour: "Vous n'avez pas les droits requis" });
+        .json({ messageRetour: "Vous n'avez pas les droits pour modifier ce profil" });
     }
   } catch (error) {
-    return res.status(500).send({ error: "Erreur serveur" });
+    return res.status(500).send({ error: "Erreur du serveur" });
   }
 };
 exports.deleteAccount = async (req, res) => {
@@ -156,14 +153,14 @@ exports.deleteAccount = async (req, res) => {
       fs.unlink(`upload/${filename}`, () => {
         // sil' y a une photo on la supprime et on supprime le compte
         db.User.destroy({ where: { id: id } });
-        res.status(200).json({ messageRetour: "utilisateur supprimé" });
+        res.status(200).json({ messageRetour: "L'utilisateur a été supprimé" });
       });
     } else {
       db.User.destroy({ where: { id: id } }); // on supprime le compte
-      res.status(200).json({ messageRetour: "utilisateur supprimé" });
+      res.status(200).json({ messageRetour: "L'utilisateur a été supprimé" });
     }
   } catch (error) {
-    return res.status(500).send({ error: "Erreur serveur" });
+    return res.status(500).send({ error: "Erreur du serveur" });
   }
 };
 

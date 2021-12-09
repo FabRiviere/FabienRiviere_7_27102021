@@ -1,9 +1,4 @@
-
 /* ! HOME PAGE */
-/* main {
-  width: 100vw;
-  height: calc(100vh - 189.5px);
-} */
 body {
   margin: 0;
   padding: 0;
@@ -13,8 +8,8 @@ body {
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 189.5px);
-  width: 100vw;
+  height: 100vh;
+  width: 100%;
   background-color: #ebecf0;
 }
 .bandeau {
@@ -37,11 +32,7 @@ body {
   font-weight: bold;
   font-family: sans-serif;
   text-transform: uppercase;
-  text-shadow: -6px 6px 12px rgba(0,0,0,0.5), 
-               6px -6px 12px rgba(255,255,255,0.8);
-  position: relative;
 }  
-
 .welcome h2 {
   font-size: 3em;
   margin: 0;
@@ -71,15 +62,13 @@ body {
 .welcome__logo:hover {
   box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
-
 /* ! HEADER- NAV */
-
 .header {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  height: 10vh;
-  width: 100vw;
+  height: 10%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -93,8 +82,8 @@ body {
   padding: 0 1em;
 }
 .nav_logo {
-  height: 200px;
-  width: 250px;
+  height: 9em;
+  width: 12.5em;
   margin: 0 1em;
 }
 .nav_logo:hover {
@@ -122,29 +111,33 @@ body {
   color: #AE1100;
   text-decoration: none;
   font-weight: bold;
-  
 }
 .black-btn:hover {
 transform: scale(1.2);
 }
 .profil {
-  width: 52px;
-  height: 52px;
+  width: 2.5em;
+  height: 2.5em;
   border-radius: .5em;
   color: #2196F3;
+}
+.profil svg {
+  width: 2.5em;
+  height: 2.5em;
+  object-fit: fill;
 }
 .profil:hover {
   transform: scale(1.3);
 }
 .avatar__img {
-  width: 52px;
-  height: 52px;
+  width: 2.5em;
+  height: 2.5em;
   object-fit: fill;
    border-radius: .5em;
 }
 .avatar__icon {
-  width: 52px;
-  height: 52px;
+  width: 2.5em;
+  height: 2.5em;
   object-fit: contain;
   border-radius: 1em;
   color: #2196F3;
@@ -152,7 +145,6 @@ transform: scale(1.2);
 .avatar__icon:hover {
   transform: scale(1.3);
 }
-
 /* ! SIGNIN & LOGIN*/
 .form-container {
   display: flex;
@@ -177,16 +169,7 @@ transform: scale(1.2);
   flex-flow: column nowrap;
   align-items: center;
 }
-/* label {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5em;
-  width: 100%; 
-  
-} */
 .input-form-field {
-  /* height: 70%;
-  width: 80%; */
   width: 90%;
   margin: 0.5em 2em 0 0;
   box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
@@ -204,6 +187,7 @@ transform: scale(1.2);
 .input-form-field:focus {
   box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
+
 .button {
   color:#61677C;
   font-weight: bold;
@@ -226,22 +210,10 @@ transform: scale(1.2);
 .error {
   width: 100%;
   color: #AE1100;
-  /* background-color: aquamarine; */
   font-size: 1.2em;
   font-weight: bold;
   text-align: center;
 }
-
-/* ! A regarder */
-/* .button--disabled {
-  background:#cecece;
-  color:#ececec
-}
-.button--disabled:hover {
-  cursor:not-allowed;
-  background:#cecece;
-}*/
-
 .danger-alert {
   padding: .5em;
   width: 100%;
@@ -249,16 +221,12 @@ transform: scale(1.2);
   color: #AE1100;
   font-weight: bold;
 } 
-
 /* ! posts */
-
 .feed-container {
   padding: 1em;
-
+  background-color: #ebecf0;
 }
 .feed-container-bloc {
-  display: flex;
-  justify-content: center;
   padding: 1em;
 }
 .feed-group-btn {
@@ -274,7 +242,7 @@ transform: scale(1.2);
  color: #AE1100;
 }
 .posts-card {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
@@ -288,9 +256,7 @@ transform: scale(1.2);
  height: 5em;
  width: 5em;
 }
-
 /* ! POST */
-
 .container-posts {
   max-width: 24em;
   display: flex;
@@ -372,8 +338,8 @@ transform: scale(1.2);
   box-shadow: inset 1px 1px 2px #FFF,inset -1px -1px 2px #BABECC;
 }
 .profil-post {
- width: 96px;
- height: 96px;
+ width: 6em;
+ height: 6em;
  margin: auto;
   border-radius: 5em;
   box-sizing: border-box;
@@ -383,8 +349,8 @@ transform: scale(1.2);
  transform: scale(1.5);
 }
 .avatar__post {
-  width: 96px;
-  height: 96px;
+  width: 6em;
+  height: 6em;
   border-radius: 5em;
   object-fit: fill;
   box-sizing: border-box;
@@ -411,6 +377,9 @@ transform: scale(1.2);
   transition: all 0.2s ease-in-out;
   appearance: none;
   -webkit-appearance: none;
+}
+.date {
+  text-align: center;
 }
 .post-card-content {
   display: flex;
@@ -512,8 +481,8 @@ transform: scale(1.2);
   margin-left: .5em;
 }
 .like-btn span {
-  width: 20px;
-  height: 20px;
+  width: 1.25em;
+  height: 1.25em;
   cursor: pointer;
 }
 .like-btn:hover {
@@ -522,9 +491,7 @@ transform: scale(1.2);
 .like-btn:active {
   box-shadow: inset 1px 1px 2px #FFF,inset -1px -1px 2px #BABECC;
 }
-
 /* ! COMMENTS POSTS */
-
 .card-comment-input form {
  width: 100%;
  display: flex;
@@ -573,8 +540,8 @@ transform: scale(1.2);
   align-items: center;
 }
 .comment_photo {
-  width: 64px;
-  height: 64px;
+  width: 4em;
+  height: 4em;
   border-radius: 2em;
   margin: 1em 0 1em 0;
   display: flex;
@@ -587,8 +554,8 @@ transform: scale(1.2);
  transform: scale(1.5);
 }
 .comment_photo img {
- width: 64px;
- height: 64px;
+ width: 4em;
+ height: 4em;
  border-radius: 2em;
  box-shadow: 2px 2px 5px #BABECC, 
  -5px -5px 10px #FFFFFF; 
@@ -632,8 +599,8 @@ transform: scale(1.2);
   margin-right: 1em;
 }
 .delete_comment span {
-  width: 16px;
-  height: 16px;
+  width: 1em;
+  height: 1em;
   cursor: pointer;
 }
 .delete_comment:hover {
@@ -642,9 +609,7 @@ transform: scale(1.2);
 .delete_comment:active {
   box-shadow: inset 1px 1px 2px #FFF,inset -1px -1px 2px #BABECC;
 }
-
 /* ! POST GETONE MODIFY */
-
 .post-title-box {
   width: 100%;
   display: flex;
@@ -686,8 +651,7 @@ transform: scale(1.2);
   font-weight: bold;
   color: #AE1100;
   text-decoration: none;
-  padding: 0 1em;
-  
+  padding: 0 1em; 
 }
 .modify-post-action {
   margin: 1em;
@@ -697,9 +661,7 @@ transform: scale(1.2);
   font-size: 1em;
   color: #045f9c;
 }
-
 /* ! Acccount */
-
 .account-box-container {
   width: 100%;
   display: flex;
@@ -855,7 +817,6 @@ input#file-upload-button{
  height: 3em;
  margin: 0;
 }
-
 /* ! Accounts */
 .avatar__account {
   padding: .2em;
@@ -875,22 +836,22 @@ input#file-upload-button{
   box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
 }
 .avatar__account img {
-  width: 200px;
-  height: 200px;
+  width: 12.5em;
+  height: 12.5em;
   object-fit: fill;
 }
 /* ! Tous les comptes */
 .avatar__accounts {
   margin-top: -3em;
   margin-bottom: 1em;
-  width: 96px;
-  height: 96px;
+  width: 6em;
+  height: 6em;
   border-radius: 3em;
   color: #2196F3;
 }
 .avatar__accounts img {
-  width: 96px;
-  height: 96px;
+  width: 6em;
+  height: 6em;
   object-fit: fill;
   border-radius: 3em;
 }
@@ -951,9 +912,7 @@ input#file-upload-button{
   justify-content: flex-start;
   align-items: center;
 }
-
 /* ! NewPost */
-
 .post-card {
   width: 50%;
   display: flex;
@@ -975,6 +934,12 @@ input#file-upload-button{
   flex-flow: column nowrap;
   justify-content: space-between;
   align-items: center;
+}
+.withImage input {
+  width: 100%;
+  height: 2em;
+  font-size: 1em;
+  text-align: center;
 }
 .card-text {
   width: 90%;
@@ -1004,8 +969,8 @@ input#file-upload-button{
   margin-left: .5em;
 }
 .hospital-icon span {
-  width: 20px;
-  height: 20px;
+  width: 1.25em;
+  height: 1.25em;
   cursor: pointer;
 }
 .hospital-icon:hover {
@@ -1061,7 +1026,6 @@ input#file-upload-button{
  .gif-label {
   margin: 1em 0 .5em 0;
  }
-
  /* ! ABOUT */
  .about-container {
    height: calc(100vh - 189.5px);
@@ -1101,7 +1065,6 @@ input#file-upload-button{
   inset -3px -3px 7px #FFFFFF;
   background: linear-gradient(318.32deg, rgba(163, 177, 198, 0.1) 0%, rgba(163, 177, 198, 0.1) 55%, rgba(163, 177, 198, 0.25) 100%);
  }
-
  /* ! FOOTER */
 .footer {
   background-color: #282828;
@@ -1111,3 +1074,173 @@ input#file-upload-button{
   height: 5em;
 }
 
+
+/* ! MEDIA QUERIES */
+
+@media (max-width: 640px) {
+  .home-container {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+  .header {
+    width: 100%;
+    height: fit-content;
+  }
+  .nav {
+   flex-flow: column nowrap;
+   padding: 0;
+  }
+  .nav_logo {
+    width: 11.25em;
+    height: 6.25em;
+    margin: 0;
+  }
+  .btngroup {
+    width: 95%;
+    justify-content: space-between;
+    margin: 0;
+  }
+  .black-btn {
+    font-size: 1em;
+  }
+  .welcome h1{
+    font-size: 1.2em;
+  }
+  .welcome__logo {
+    width: 6.2em;
+    height: 6.2em;
+    margin: 1em 0;
+  }
+  .welcome__logo img {
+    width: 5em;
+    height: 5em;
+  }
+  /* ! POSTS */
+  .feed-group-btn {
+    width: 100%;
+    padding: .5em;
+  }
+  .recents, .hot-posts, .add-btn {
+    font-size: 1em;
+    padding: .5em .7em;
+  }
+  .post-card-content {
+    margin: 1em 0;
+  }
+  .container-posts {
+    width: 100%;
+    margin:0 0 3em 0;
+    padding: .5em;
+  }
+  .post-card-only {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  .card-actions-comments {
+    font-size: 1em;
+    padding: 0 .3em;
+  }
+  .card-actions-comments button {
+    font-size: 1em;
+    padding: 0 .3em;
+  }
+  .comment_photo svg {
+    width: 64px;
+    height: 64px;
+  }
+  /* ! ACCOUNT */
+  .account-box {
+    width: 100vw;
+    height: 100%;
+  }
+  .account-card {
+    width: 100%;
+  }
+  .titre {
+    font-size: 1.5em;
+  }
+  .profil-middle__left {
+    width: 100%;
+    padding: .5em;
+  }
+  .button {
+    font-size: 1em;
+    padding: .5em;
+    margin-left: .5em;
+  }
+  .pseudo {
+    padding: .5em;
+  }
+  .bio {
+    padding: .5em;
+  }
+  .bio-text span {
+    margin: 0;
+  }
+  .input-form-field {
+    padding: .5em;
+  }
+  .account_Photo {
+    padding: 0;
+  }
+  .updatePhoto {
+    padding: .5em;
+    font-size: 1em;
+  }
+  /* ! ACCOUNTS */
+  .accounts-box {
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    height: 100%;
+    margin: .5em 0;
+  }
+  /* ! about */
+  .about-container {
+    height: 100%;
+  }
+  .about-about {
+    margin: 0 .5em;
+    padding: .5em;
+  }
+  .about-about h1{
+   font-size: 1.2em;
+    padding: .5em 2em;
+  }
+  /* ! HOT FEED */
+  .feed-container-bloc {
+    width: 100%;
+    margin-bottom: 4em;
+    padding: 0;
+  }
+  .card-text {
+    padding: 0;
+  }
+  .body-1 {
+    font-size: .8em;
+  }
+  /* ! new POST */
+  .post-card-new {
+    width: 90%;
+  }
+  .card-text-new {
+    margin: 1em 0;
+  }
+  .post {
+    width: 100%;
+  }
+  .post-btn {
+    width: 50%;
+    font-size: 1.5em;
+  }
+  /* ! SINGLE POST */
+  .post-card_singlePost {
+    width: 90%;
+  }
+  .message-title {
+    width: 100%;
+  }
+  .toggleMessage {
+    margin-bottom: 1em;
+  }
+}

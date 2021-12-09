@@ -1,6 +1,6 @@
 <template>
   <div class="home-container">
-      <div class="post-card">
+      <div class="post-card post-card_singlePost">
           <div class="post-title-box">
               <div class="update-title">
                   <h1 class="titre_new">Modifier</h1>
@@ -11,7 +11,7 @@
               </div>
           </div>
           <div class="card-text">
-              <div class="cart-text-content" v-if="showMessage">
+              <div class="cart-text-content post-card_singlePost" v-if="showMessage">
                   <div class="message-title">
                       <span class="mess-title">Ton message :</span>
                       <div class="message">

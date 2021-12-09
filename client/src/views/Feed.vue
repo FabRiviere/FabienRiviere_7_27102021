@@ -57,6 +57,7 @@
 <script>
 import Posts from "../components/Posts.vue";
 import Tooltip from '../components/Tooltip.vue';
+import PostService from "../services/PostService";
 export default {
   name: "Feed",
   components: {
@@ -80,11 +81,22 @@ export default {
   },
 
   methods: {
+    async reloadFeed() {
+      try {
+        const response = await PostService.getPosts();
+        this.posts = response.data;
+      } catch (error) {
+        this.errorMessage = error.response.data.error;
+      }
+    },
     deletePost(id) {
       this.$store.dispatch("deletePost", id);
     },
     deleteComment(id) {
-      this.$store.dispatch("deleteComment", id);
+      
+      this.$store.dispatch("deleteComment", id),
+      this.reloadFeed();
+            
     },
 
     likePost(id) {

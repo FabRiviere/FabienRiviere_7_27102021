@@ -6,9 +6,9 @@
                   <div class="post-title">
                       <div class="profil-post">
                           <img v-if="post.User.photo" :src="post.User.photo" alt="photo de profil" class="avatar__post"/>
-                          <mdicon name="account-circle" role="avatar-personnalisé" 
+                          <mdicon name="account-circle"  
                           v-else-if="post.User.photo === null && post.User.id === $store.state.user.id" size="96px"/>
-                          
+                          <mdicon name="account-circle" role="avatar" v-else class="avatar__post" size="96px" />
                       </div>
                       <div class="nom-date">
                           <span class="pseudo">{{ post.User.pseudo }} </span>
@@ -67,10 +67,10 @@
                       <div class="comments-box">
                           <div class="card-comment-input">
                               <form @submit.prevent="onSubmitComment(post.id)">
-                                  <input type="text" name="input-1-4" id="input-1-4" placeholder="ton commentaire"
+                                  <input type="text" name="input-1-4" id="input-1-4" placeholder="ton commentaire" 
                                   v-model="data.commentMessage" class="input-form-field" required/>
 
-                                  <button type="submit" :disabled="!isValid"
+                                  <button type="submit" :disabled="!isValid"  @click="onSubmitComment(post.id)"
                                   class="button comment-btn">Poster</button>
                               </form>
 
@@ -115,6 +115,7 @@
 import Tooltip  from './Tooltip.vue';
 import PostService from "../services/PostService";
 
+
 export default {
   name: "Posts",
   components: {
@@ -143,6 +144,7 @@ export default {
       data: {
         commentMessage: "",
         commentPseudo: this.$store.state.user.pseudo,
+        
       },
     };
   },
@@ -191,9 +193,14 @@ export default {
     },
 
     deleteComment(id) {
-      this.$store.dispatch("deleteComment", id), this.reloadFeed();
+      
+      this.$store.dispatch("deleteComment", id);
+     
+        this.reloadFeed();
+      
+      
     },
   },
 };
 </script>
-<style lang="css" scoped></style>
+

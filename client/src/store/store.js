@@ -44,12 +44,11 @@ export default new Vuex.Store({
     },
     isLogged(state) {
       return state.isLoggedIn;
-    },
-    
+    },  
   },
 
   mutations: {
-    // users
+    //! users
     SET_TOKEN(state, token) {
       state.token = token;
       if (token) {
@@ -91,10 +90,9 @@ export default new Vuex.Store({
       state.message = "";
       state.error = "";
     },
-    
-    // end users
+    //! end users
 
-    // posts
+    //! posts
 
     GET_POSTS(state, posts) {
       (state.posts = posts), (state.isLoading = false);
@@ -115,37 +113,34 @@ export default new Vuex.Store({
         state.posts.find((element) => element.id === id),
         post
       );
-     
       state.message = "Votre post est bien modifié";
     },
-
     DELETE_POST(state, id) {
       state.posts = [...state.posts.filter((element) => element.id !== id)];
       state.message = "post supprimé";
     },
-    // end posts
+    //! end posts
 
-    // comments
+    //! comments
     COMMENT_POST(state, comment) {
       state.posts = [comment, ...state.posts];
       state.message = "post commenté";
-     
     },
     DELETE_COMMENT(state, id) {
       state.posts = [...state.posts.filter((element) => element.id !== id)];
       state.message = "commentaire supprimé";
     },
-    // end comments
+    //! end comments
 
-    // like
+    //! like
 
     LIKE_POST(state, like) {
       state.posts = [like, ...state.posts];
     },
-    // end like
+    //! end like
   },
   actions: {
-    //users
+    //!users
     setToken({ commit }, token) {
       commit("SET_TOKEN", token);
     },
@@ -172,7 +167,6 @@ export default new Vuex.Store({
         commit("GET_USER_BY_ID", user);
       });
     },
-    
     deleteAccount({ commit }, id) {
       Auth.deleteAccount(id).then(() => {       
           commit("DELETE_ACCOUNT", id);
@@ -195,14 +189,13 @@ export default new Vuex.Store({
         })
       })
     },
-    // end users
+    //! end users
 
-    // posts
+    //! posts
 
     getPosts({ commit }) {
       PostService.getPosts().then((response) => {
         const posts = response.data;
-        // console.log(posts);
         commit("GET_POSTS", posts);
       });
     },
@@ -212,7 +205,6 @@ export default new Vuex.Store({
         commit("GET_HOT_POSTS", posts);
       });
     },
-
     getPostById({ commit }, id) {
       PostService.getPostById(id).then((response) => {
         const post = response.data;
@@ -256,9 +248,9 @@ export default new Vuex.Store({
         });
     },
 
-    // end posts
+    //! end posts
 
-    //like
+    //!like
     likePost({ commit }, payload) {
       axios
         .post(
@@ -272,18 +264,16 @@ export default new Vuex.Store({
         })
         .then(() => {
           PostService.getPosts().then((response) => {
-            const posts = response.data;
-            
+            const posts = response.data; 
             commit("GET_POSTS", posts);
           });
         });
     },
 
-    // end like
+    //! end like
 
-    // comment
-    commentPost({ commit }, payload) {
-      
+    //! comment
+    commentPost({ commit }, payload) { 
       axios
         .post(
           `${process.env.VUE_APP_API_ENDPOINT}posts/${payload.id}/comments`,
@@ -292,9 +282,7 @@ export default new Vuex.Store({
         )
         .then((response) => {
           const comment = response.data;
-          console.log(comment);
-          commit("COMMENT_POST", comment);
-         
+          commit("COMMENT_POST", comment);        
         })
         .then(() => {
           PostService.getPosts().then((response) => {

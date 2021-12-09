@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
         const userId = decodedToken.sub;         
         if (req.body.userId && (req.body.userId !== userId)) { 
             // on compare le userid de la requête à celui du token
-            throw 'User id non valable !';
+            throw 'User id invalide !';
         } else {
             next();
         }

@@ -32,7 +32,7 @@ exports.getAllPosts = async (req, res) => {
       res.status(200).send(posts);
     } catch (error) {
       return res.status(500).send({
-        error: "Une erreur est survenu lors de la récupération des posts ",
+        error: "Une erreur est survenue lors du chargement des posts ",
       });
     }
   };
@@ -80,7 +80,7 @@ exports.getAllPosts = async (req, res) => {
       res.status(200).send(posts);
     } catch (error) {
       return res.status(500).send({
-        error: "Une erreur est survenu lors de la récupération des posts ",
+        error: "Une erreur est survenue lors du chargement des posts ",
       });
     }
   };
@@ -113,7 +113,7 @@ exports.getAllPosts = async (req, res) => {
       });
       res.status(200).json(post);
     } catch (error) {
-      return res.status(500).send({ error: "Erreur serveur" });
+      return res.status(500).send({ error: "Erreur du serveur" });
     }
   };
   exports.createPost = async (req, res) => {
@@ -136,7 +136,7 @@ exports.getAllPosts = async (req, res) => {
           include: [
             {
               model: db.User,
-              attributes: ["pseudo", "photo", "id"],
+              attributes: ["pseudo","id", "photo"],
             },
           ],
           message: req.body.message,
@@ -147,12 +147,12 @@ exports.getAllPosts = async (req, res) => {
   
         res
           .status(201)
-          .json({ post: post, messageRetour: "Votre post est ajouté" });
+          .json({ post: post, messageRetour: "Votre post est en ligne" });
       } else {
         res.status(400).send({ error: "Erreur " });
       }
     } catch (error) {
-      return res.status(500).send({ error: "Erreur serveur" });
+      return res.status(500).send({ error: "Erreur du serveur" });
     }
   };
   exports.deletePost = async (req, res) => {
@@ -172,10 +172,10 @@ exports.getAllPosts = async (req, res) => {
           res.status(200).json({ message: "Post supprimé" });
         }
       } else {
-        res.status(400).json({ message: "Vous n'avez pas les droits requis" });
+        res.status(400).json({ message: "Vous n'avez pas les droits pour supprimer ce post" });
       }
     } catch (error) {
-      return res.status(500).send({ error: "Erreur serveur" });
+      return res.status(500).send({ error: "Erreur du serveur" });
     }
   };
   
@@ -209,10 +209,10 @@ exports.getAllPosts = async (req, res) => {
         });
         res.status(200).json({ newPost: newPost, messageRetour: "post modifié" });
       } else {
-        res.status(400).json({ message: "Vous n'avez pas les droits requis" });
+        res.status(400).json({ message: "Vous n'avez pas les droits pour modifier ce post" });
       }
     } catch (error) {
-      return res.status(500).send({ error: "Erreur serveur" });
+      return res.status(500).send({ error: "Erreur du serveur" });
     }
   };
   
@@ -237,7 +237,7 @@ exports.getAllPosts = async (req, res) => {
         res.status(201).json({ messageRetour: "vous aimez ce post" });
       }
     } catch (error) {
-      return res.status(500).send({ error: "Erreur serveur" });
+      return res.status(500).send({ error: "Erreur du serveur" });
     }
   };
   exports.addComment = async (req, res) => {
@@ -255,7 +255,7 @@ exports.getAllPosts = async (req, res) => {
         .status(201)
         .json({ newComment, messageRetour: "votre commentaire est publié" });
     } catch (error) {
-      return res.status(500).send({ error: "Erreur serveur" });
+      return res.status(500).send({ error: "Erreur du serveur" });
     }
   };
   exports.deleteComment = async (req, res) => {
@@ -268,10 +268,10 @@ exports.getAllPosts = async (req, res) => {
         db.Comment.destroy({ where: { id: req.params.id } }, { truncate: true });
         res.status(200).json({ message: "commentaire supprimé" });
       } else {
-        res.status(400).json({ message: "Vous n'avez pas les droits requis" });
+        res.status(400).json({ message: "Vous n'avez pas les droits pour supprimer ce commentaire" });
       }
     } catch (error) {
-      return res.status(500).send({ error: "Erreur serveur" });
+      return res.status(500).send({ error: "Erreur du serveur" });
     }
   };
   

@@ -1,7 +1,7 @@
 <template>
  <div class="feed-container">
       <div class="feed-container-bloc">
-          <div>
+          
               <div class="posts-card">
                   <div class="welcome__logo">
                     <img src="../assets/icon.svg" alt="logo Groupomania">
@@ -30,7 +30,7 @@
                         
                   </div>
               </div>
-          </div>
+          
       </div>
       <div class="feed-container-bloc2">
           <div>
