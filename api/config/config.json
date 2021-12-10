@@ -1,23 +1,23 @@
 {
-  "development": {
-    "username": "Fabsolo",
-    "password": "KatAmbre0207",
-    "database": "socialDB_dev",
-    "host": "localhost",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "Fabsolo",
-    "password": "KatAmbre0207",
-    "database": "socialDB_test",
-    "host": "localhost",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "Fabsolo",
-    "password": "KatAmbre0207",
-    "database": "socialDB_prod",
-    "host": "localhost",
-    "dialect": "mysql"
-  }
+	"development": {
+		"username": "Fabsolo",
+		"password": "KatAmbre0207",
+		"database": "socialDB_dev",
+		"host": "localhost",
+		"dialect": "mysql"
+	},
+	"test": {
+		"username": "Fabsolo",
+		"password": "KatAmbre0207",
+		"database": "socialDB_test",
+		"host": "localhost",
+		"dialect": "mysql"
+	},
+	"production": {
+		"username": "Fabsolo",
+		"password": "KatAmbre0207",
+		"database": "socialDB_prod",
+		"host": "localhost",
+		"dialect": "mysql"
+	}
 }

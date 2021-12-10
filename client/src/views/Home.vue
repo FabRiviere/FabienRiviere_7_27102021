@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="bandeau">
       <div class="welcome__logo">
-        <img src="../assets/icon.svg" alt="logo Groupomania">
+        <img src="../assets/icon.svg" alt="logo Groupomania" />
       </div>
       <div class="welcome">
         <h1>GroupoMania Social</h1>
@@ -15,13 +15,12 @@
 <script>
 // @ is an alias to /src
 
-
 export default {
-  name: 'Home',
+  name: "Home",
   methods: {
-    logOut: function() {
+    logOut: function () {
       this.$store.dispatch("logOut");
     },
   },
-}
+};
 </script>

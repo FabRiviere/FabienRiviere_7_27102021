@@ -1,66 +1,51 @@
 <template>
   <div class="tooltip-box">
     <slot />
-    <div
-      class="tooltip"
-    >
-      <span
-        class="text"
-      >{{ text }}</span>
+    <div class="tooltip">
+      <span class="text">{{ text }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: { 
+  props: {
     text: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
 <style scoped lang="css">
-.tooltip-box { 
-  /* width: 100%; */
+.tooltip-box {
   position: relative;
-  /* display: flex;
-  justify-content: flex-start; */
 }
 
-.tooltip-box:hover .tooltip{
+.tooltip-box:hover .tooltip {
   opacity: 1;
 }
 
-.tooltip { 
-  /* color: #000000; */
+.tooltip {
   text-align: center;
-  padding: .3em 0;
-  border-radius: .5em;
-  
+  padding: 0.3em 0;
+  border-radius: 0.5em;
+
   width: 120px;
   bottom: 100%;
   right: 0;
-  /* margin-left: -.5em; */
-
   opacity: 0;
   transition: opacity 1s;
-
   position: absolute;
   z-index: 1;
-
   background: #faf614;
-
   box-sizing: border-box;
-  box-shadow: .3rem .3rem .6rem #c8d0e7, 
-  -.2rem -.2rem .5rem #FFF;
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #fff;
   border: 0;
   outline: 0;
-  /* border-radius: 1em ; */
   font-weight: bold;
-  color: #AE1100;
+  color: #ae1100;
 }
 
 .text::after {
@@ -71,6 +56,6 @@ export default {
   margin-left: -10px;
   border-width: 10px;
   border-style: solid;
-  border-color: #AE1100 transparent transparent transparent;
+  border-color: #ae1100 transparent transparent transparent;
 }
 </style>
