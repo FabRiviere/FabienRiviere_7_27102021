@@ -17,12 +17,12 @@ export default new Vuex.Store({
 		posts: [],
 		users: [],
 		post: {},
-		message: '',
-		error: ''
+		message:"",
+		error: "",
 	},
 	plugins: [
 		createPersistedState({
-			storage: window.sessionStorage
+			storage: window.sessionStorage,
 		})
 	],
 	getters: {
@@ -207,17 +207,16 @@ export default new Vuex.Store({
 			});
 		},
 		createPost({ commit }, post) {
-			PostService.createPost(post)
-				.then((response) => {
-					const post = response.data;
-					commit('ADD_POST', post);
-				})
-				.then(() => {
-					PostService.getPosts().then((response) => {
-						const posts = response.data;
-						commit('GET_POSTS', posts);
-					});
+			PostService.createPost(post).then((response) => {
+				const post = response.data;
+				commit('ADD_POST', post);
+			})
+			.then(() => {
+				PostService.getPosts().then((response) => {
+					const posts = response.data;
+					commit('GET_POSTS', posts);
 				});
+			});
 		},
 		updatePost({ commit }, data) {
 			let id = this.state.post.id;
@@ -234,13 +233,8 @@ export default new Vuex.Store({
 			PostService.deletePost(id)
 				.then(() => {
 					commit('DELETE_POST', id);
-				})
-				.then(() => {
-					PostService.getPosts().then((response) => {
-						const posts = response.data;
-						commit('GET_POSTS', posts);
-					});
 				});
+				
 		},
 
 		// end posts
@@ -283,16 +277,9 @@ export default new Vuex.Store({
 				});
 		},
 		deleteComment({ commit }, id) {
-			PostService.deleteComment(id)
-				.then(() => {
-					commit('DELETE_COMMENT', id);
-				})
-				.then(() => {
-					PostService.getPosts().then((response) => {
-						const posts = response.data;
-						commit('GET_POSTS', posts);
-					});
-				});
+			PostService.deleteComment(id).then(() => {
+				commit('DELETE_COMMENT', id);
+			});
 		}
 	}
 });

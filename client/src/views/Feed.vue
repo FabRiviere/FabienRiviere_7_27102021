@@ -117,7 +117,7 @@ export default {
       return this.$store.getters.posts;
     },
   },
-
+ 
   data() {
     return {
       errorMessage: null,

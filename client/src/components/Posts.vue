@@ -120,26 +120,21 @@
             <div class="comments-box">
               <div class="card-comment-input">
                 <form @submit.prevent="onSubmitComment(post.id)">
-                  <ValidationProvider
-                    name="card-comment"
-                    rules="required"
-                    v-slot="v"
-                  >
+                 
                     <input
                       type="text"
                       name="input-1-4"
                       id="input-1-4"
                       placeholder="ton commentaire"
-                      v-model="data.commentMessage"
+                       v-model="data.commentMessage"                   
                       class="input-form-field"
                     />
-                    <div class="error">{{ v.errors[0] }}</div>
-                  </ValidationProvider>
+                 
 
                   <button
                     type="submit"
                     :disabled="!isValid"
-                    @click="onSubmitComment(post.id)"
+                  
                     class="button comment-btn"
                   >
                     Poster
@@ -174,7 +169,7 @@
                       role="avatar"
                       size="64px"
                     />
-                    <mdicon name="account-circle" role="avatar" v-else />
+                    <mdicon name="account-circle" role="avatar" v-else size="64px" />
                   </div>
                   <div class="comment_body">
                     <strong
@@ -221,13 +216,6 @@
 <script>
 import Tooltip from "./Tooltip.vue";
 import PostService from "../services/PostService";
-import { extend } from "vee-validate";
-import { required } from "vee-validate/dist/rules";
-
-extend("required", {
-  ...required,
-  message: "Ce champ est obligatoire",
-});
 
 export default {
   name: "Posts",
@@ -239,6 +227,7 @@ export default {
     post: {
       type: Object,
     },
+    
   },
   data: function () {
     return {
@@ -249,11 +238,15 @@ export default {
       showFeed: true,
       update: false,
       isValid: true,
+      rules: {
+        required: (value) => !!value || "Required.",
+      },
       messageRetour: null,
       errorMessage: null,
       data: {
-        commentMessage: "",
+        commentMessage: '',
         commentPseudo: this.$store.state.user.pseudo,
+       
       },
     };
   },
@@ -296,13 +289,15 @@ export default {
         id: id,
         data: this.data,
       });
-      this.data.commentMessage = "";
+      this.data.commentMessage = '';
       this.$store.dispatch("getPosts");
       this.$store.dispatch("getPostById", this.post.id);
     },
 
     deleteComment(id) {
-      this.$store.dispatch("deleteComment", id), this.reloadFeed();
+      this.$store.dispatch("deleteComment", id),
+       this.reloadFeed();
+      
     },
   },
 };
